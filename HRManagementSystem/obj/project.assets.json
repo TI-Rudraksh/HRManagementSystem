@@ -6124,24 +6124,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/rudrakshjani/.nuget/packages/": {}
+    "C:\\Users\\dell\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/RudrSSD/Projects/Techies/HRManagementSystem/HRManagementSystem/HRManagementSystem.csproj",
+      "projectUniqueName": "C:\\Users\\dell\\OneDrive\\Desktop\\Teachies Infotech\\HRManagmentSystem\\HRmanagment\\HRManagementSystem\\HRManagementSystem.csproj",
       "projectName": "HRManagementSystem",
-      "projectPath": "/Volumes/RudrSSD/Projects/Techies/HRManagementSystem/HRManagementSystem/HRManagementSystem.csproj",
-      "packagesPath": "/Users/rudrakshjani/.nuget/packages/",
-      "outputPath": "/Volumes/RudrSSD/Projects/Techies/HRManagementSystem/HRManagementSystem/obj/",
+      "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\Teachies Infotech\\HRManagmentSystem\\HRmanagment\\HRManagementSystem\\HRManagementSystem.csproj",
+      "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dell\\OneDrive\\Desktop\\Teachies Infotech\\HRManagmentSystem\\HRmanagment\\HRManagementSystem\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/rudrakshjani/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6160,7 +6167,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net10.0": {
@@ -6210,7 +6217,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
