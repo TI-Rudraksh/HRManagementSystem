@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GAZ7ecDq5xE=",
+  "dgSpecHash": "XBNq64UCjLM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\dell\\OneDrive\\Desktop\\Teachies Infotech\\HRManagmentSystem\\HRmanagment\\HRManagementSystem\\HRManagementSystem.csproj",
+  "projectFilePath": "C:\\Users\\dell\\HRmanagmentsystem\\HR\\HRManagementSystem\\HRManagementSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dell\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
