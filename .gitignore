@@ -1,0 +1,50 @@
+/HRManagementSystem.sln
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / VSCode
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+packages/
+!packages/build/
+*.snupkg
+
+# ASP.NET Core settings (environment-specific)
+appsettings.Development.json
+appsettings.Local.json
+
+# Secrets
+secrets.json
+
+# Publish output
+publish/
+wwwroot/dist/
+wwwroot/lib/
+
+# Node modules (if frontend included)
+node_modules/
+
+# Entity Framework migrations snapshot (optional if team policy)
+*Migrations/*Designer.cs
+
+appsettings.Development.json
+appsettings.Production.json
