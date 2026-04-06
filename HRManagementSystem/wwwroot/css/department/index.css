@@ -1,0 +1,140 @@
+.page-header {
+    background: linear-gradient(135deg, #a83232, #c0392b);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    color: white;
+}
+
+.search-box {
+    background: white;
+    border-radius: 10px;
+    border: 1.5px solid #e0e0e0;
+    padding: 10px 16px;
+    font-size: 14px;
+    width: 240px;
+    transition: 0.3s;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: #a83232;
+    box-shadow: 0 0 0 3px rgba(168,50,50,0.1);
+}
+
+.dept-table-wrap {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    overflow: hidden;
+}
+
+.dept-table thead tr {
+    background: #f8f9fa;
+}
+
+.dept-table thead th {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #888;
+    padding: 14px 20px;
+    border: none;
+}
+
+.dept-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: 0.2s;
+}
+
+.dept-table tbody tr:hover {
+    background: #fff5f5;
+}
+
+.dept-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.dept-table tbody td {
+    padding: 16px 20px;
+    border: none;
+    vertical-align: middle;
+}
+
+.dept-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #a83232, #c0392b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.dept-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: #222;
+}
+
+.dept-id-badge {
+    font-size: 11px;
+    background: #f0f0f0;
+    color: #888;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.btn-action {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.btn-edit {
+    background: #fff8e1;
+    color: #f39c12;
+}
+
+.btn-edit:hover {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-view {
+    background: #e8f4fd;
+    color: #2980b9;
+}
+
+.btn-view:hover {
+    background: #2980b9;
+    color: white;
+}
+
+.btn-delete {
+    background: #fdecea;
+    color: #e74c3c;
+}
+
+.btn-delete:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #aaa;
+}

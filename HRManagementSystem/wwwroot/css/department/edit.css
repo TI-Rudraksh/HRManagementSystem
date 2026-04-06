@@ -1,0 +1,74 @@
+
+.edit-wrapper {
+    background: linear-gradient(135deg, #f5f7fa, #e8ecf1);
+    min-height: 100vh;
+    padding: 30px 0;
+}
+
+.edit-card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    border: none;
+}
+
+.edit-header {
+    background: linear-gradient(135deg, #a83232, #c0392b);
+    padding: 28px 32px;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1.5px solid #e0e0e0;
+    padding: 12px 16px;
+    font-size: 14px;
+    transition: 0.3s;
+    background: #fafafa;
+}
+
+.form-control:focus {
+    border-color: #a83232;
+    box-shadow: 0 0 0 3px rgba(168,50,50,0.1);
+    background: white;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #a83232, #c0392b);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 36px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(168,50,50,0.3);
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(168,50,50,0.4);
+    color: white;
+}
+
+.btn-back {
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid #ddd;
+    color: #666;
+    background: white;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    border-color: #a83232;
+    color: #a83232;
+}
