@@ -1,0 +1,276 @@
+﻿@model IEnumerable<CrudOperation_1.Models.Department>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<style>
+    .page-header {
+        background: linear-gradient(135deg, #a83232, #c0392b);
+        border-radius: 16px;
+        padding: 24px 28px;
+        margin-bottom: 28px;
+        color: white;
+    }
+
+    .search-box {
+        background: white;
+        border-radius: 10px;
+        border: 1.5px solid #e0e0e0;
+        padding: 10px 16px;
+        font-size: 14px;
+        width: 240px;
+        transition: 0.3s;
+    }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #a83232;
+            box-shadow: 0 0 0 3px rgba(168,50,50,0.1);
+        }
+
+    .dept-table-wrap {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        overflow: hidden;
+    }
+
+    .dept-table thead tr {
+        background: #f8f9fa;
+    }
+
+    .dept-table thead th {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #888;
+        padding: 14px 20px;
+        border: none;
+    }
+
+    .dept-table tbody tr {
+        border-bottom: 1px solid #f0f0f0;
+        transition: 0.2s;
+    }
+
+        .dept-table tbody tr:hover {
+            background: #fff5f5;
+        }
+
+        .dept-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+    .dept-table tbody td {
+        padding: 16px 20px;
+        border: none;
+        vertical-align: middle;
+    }
+
+    .dept-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #a83232, #c0392b);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .dept-name {
+        font-weight: 600;
+        font-size: 15px;
+        color: #222;
+    }
+
+    .dept-id-badge {
+        font-size: 11px;
+        background: #f0f0f0;
+        color: #888;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    .btn-action {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        transition: 0.2s;
+        text-decoration: none;
+    }
+
+    .btn-edit {
+        background: #fff8e1;
+        color: #f39c12;
+    }
+
+        .btn-edit:hover {
+            background: #f39c12;
+            color: white;
+        }
+
+    .btn-view {
+        background: #e8f4fd;
+        color: #2980b9;
+    }
+
+        .btn-view:hover {
+            background: #2980b9;
+            color: white;
+        }
+
+    .btn-delete {
+        background: #fdecea;
+        color: #e74c3c;
+    }
+
+        .btn-delete:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #aaa;
+    }
+</style>
+
+<div class="container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <div>
+            <h4 class="mb-1 fw-bold">
+                <i class="bi bi-buildings-fill me-2"></i> Departments
+            </h4>
+            <p class="mb-0" style="opacity:0.8; font-size:13px;">
+                Total @Model.Count() departments
+            </p>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+
+            <!-- Search -->
+            <div style="position:relative;">
+                <i class="bi bi-search" style="position:absolute;left:12px;top:50%;
+                   transform:translateY(-50%);color:#aaa;"></i>
+                <input type="text" id="searchInput" class="search-box"
+                       placeholder="Search department..."
+                       style="padding-left:36px;"
+                       onkeyup="searchDept()" />
+            </div>
+
+            <!-- Add Button -->
+            <a asp-action="Create"
+               style="background:white;color:#a83232;border-radius:10px;
+                      padding:10px 20px;font-weight:600;font-size:14px;
+                      text-decoration:none;border:2px solid white;transition:0.3s;"
+               onmouseover="this.style.background='transparent';this.style.color='white';"
+               onmouseout="this.style.background='white';this.style.color='#a83232';">
+                <i class="bi bi-plus-circle-fill me-1"></i> Add Department
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="dept-table-wrap">
+        <table class="table dept-table mb-0" id="deptTable">
+            <thead>
+                <tr>
+                    <th style="width:60px;">#</th>
+                    <th>Department Name</th>
+                    <th class="text-end" style="width:160px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="3">
+                            <div class="empty-state">
+                                <i class="bi bi-buildings" style="font-size:48px;"></i>
+                                <p class="mt-3 mb-0 fw-semibold">No departments found</p>
+                                <p style="font-size:13px;">Click "Add Department" to create one</p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    int sr = 1;
+                    @foreach (var item in Model)
+                    {
+                        <tr class="dept-row">
+                            <td>
+                                <span class="dept-id-badge">@sr</span>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="dept-icon">
+                                        <i class="bi bi-buildings"></i>
+                                    </div>
+                                    <div>
+                                        <div class="dept-name">@item.DepartmentName</div>
+                                        <div style="font-size:12px;color:#aaa;">
+                                            ID : @item.Dept_Id
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-end">
+                                <div class="d-flex justify-content-end gap-2">
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Dept_Id"
+                                       class="btn-action btn-edit"
+                                       title="Edit">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.Dept_Id"
+                                       class="btn-action btn-view"
+                                       title="View">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Dept_Id"
+                                       class="btn-action btn-delete"
+                                       title="Delete"
+                                       onclick="return confirm('Delete @item.DepartmentName?')">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        sr++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        function searchDept() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.querySelectorAll('.dept-row');
+            rows.forEach(function (row) {
+                var text = row.innerText.toLowerCase();
+                row.style.display = text.includes(input) ? '' : 'none';
+            });
+        }
+    </script>
+}

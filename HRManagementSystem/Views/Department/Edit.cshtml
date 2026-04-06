@@ -1,0 +1,146 @@
+﻿@model CrudOperation_1.Models.Department
+
+@{
+    ViewData["Title"] = "Edit Department";
+}
+
+<style>
+    .edit-wrapper {
+        background: linear-gradient(135deg, #f5f7fa, #e8ecf1);
+        min-height: 100vh;
+        padding: 30px 0;
+    }
+
+    .edit-card {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        border: none;
+    }
+
+    .edit-header {
+        background: linear-gradient(135deg, #a83232, #c0392b);
+        padding: 28px 32px;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        border: 1.5px solid #e0e0e0;
+        padding: 12px 16px;
+        font-size: 14px;
+        transition: 0.3s;
+        background: #fafafa;
+    }
+
+        .form-control:focus {
+            border-color: #a83232;
+            box-shadow: 0 0 0 3px rgba(168,50,50,0.1);
+            background: white;
+        }
+
+    .form-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 6px;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #a83232, #c0392b);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 36px;
+        font-weight: 600;
+        font-size: 15px;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(168,50,50,0.3);
+    }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168,50,50,0.4);
+            color: white;
+        }
+
+    .btn-back {
+        border-radius: 10px;
+        padding: 12px 28px;
+        font-weight: 600;
+        font-size: 15px;
+        border: 2px solid #ddd;
+        color: #666;
+        background: white;
+        transition: 0.3s;
+    }
+
+        .btn-back:hover {
+            border-color: #a83232;
+            color: #a83232;
+        }
+</style>
+
+<div class="edit-wrapper">
+    <div class="container" style="max-width:560px;">
+        <div class="edit-card card">
+
+            <!-- Header -->
+            <div class="edit-header">
+                <div class="d-flex align-items-center gap-3">
+                    <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);
+                                border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                        <i class="bi bi-pencil-fill" style="font-size:22px;color:white;"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 text-white fw-bold">Edit Department</h4>
+                        <p class="mb-0 text-white" style="opacity:0.75;font-size:13px;">
+                            Update details for @Model.DepartmentName
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body p-4">
+                <form asp-action="Edit" method="post">
+
+                    <input type="hidden" asp-for="Dept_Id" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Department Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text"
+                                  style="border-radius:10px 0 0 10px;border-color:#e0e0e0;">
+                                <i class="bi bi-buildings-fill" style="color:#a83232;"></i>
+                            </span>
+                            <input asp-for="DepartmentName" class="form-control"
+                                   placeholder="Enter department name"
+                                   style="border-radius:0 10px 10px 0;" />
+                        </div>
+                        <span asp-validation-for="DepartmentName" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-save">
+                            <i class="bi bi-save-fill me-2"></i> Update Department
+                        </button>
+                        <a asp-action="Index" class="btn btn-back">
+                            <i class="bi bi-arrow-left me-2"></i> Back
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

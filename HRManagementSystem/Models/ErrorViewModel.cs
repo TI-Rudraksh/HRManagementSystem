@@ -1,8 +1,9 @@
-namespace HRManagementSystem.Models;
-
-public class ErrorViewModel
+namespace CrudOperation_1.Models
 {
-    public string? RequestId { get; set; }
+    public class ErrorViewModel
+    {
+        public string? RequestId { get; set; }
 
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    }
 }

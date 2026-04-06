@@ -1,0 +1,364 @@
+﻿@model CrudOperation_1.Models.Employee
+
+@{
+    ViewData["Title"] = "Create Employee";
+}
+
+<style>
+    .create-wrapper {
+        background: linear-gradient(135deg, #f5f7fa, #e8ecf1);
+        min-height: 100vh;
+        padding: 30px 0;
+    }
+
+    .create-card {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        border: none;
+    }
+
+    .create-header {
+        background: linear-gradient(135deg, #a83232, #c0392b);
+        padding: 28px 32px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 10px;
+        border: 1.5px solid #e0e0e0;
+        padding: 10px 14px;
+        font-size: 14px;
+        transition: 0.3s;
+        background: #fafafa;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #a83232;
+            box-shadow: 0 0 0 3px rgba(168,50,50,0.1);
+            background: white;
+        }
+
+    .form-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 6px;
+    }
+
+    .section-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #a83232;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-left: 3px solid #a83232;
+        padding-left: 10px;
+        margin-bottom: 18px;
+    }
+
+    .img-preview-wrap {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        border: 3px dashed #a83232;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff5f5;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .img-preview-wrap:hover {
+            background: #fde8e8;
+        }
+
+        .img-preview-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .gender-option input[type="radio"] {
+        display: none;
+    }
+
+    .gender-label {
+        padding: 8px 24px;
+        border-radius: 25px;
+        border: 2px solid #e0e0e0;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        color: #888;
+        transition: 0.3s;
+        user-select: none;
+    }
+
+    .gender-option input[type="radio"]:checked + .gender-label {
+        background: #a83232;
+        border-color: #a83232;
+        color: white;
+    }
+
+    .status-toggle {
+        width: 48px;
+        height: 26px;
+        position: relative;
+        display: inline-block;
+    }
+
+        .status-toggle input {
+            display: none;
+        }
+
+    .status-slider {
+        position: absolute;
+        inset: 0;
+        background: #ddd;
+        border-radius: 34px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .status-slider:before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+    .status-toggle input:checked + .status-slider {
+        background: #28a745;
+    }
+
+        .status-toggle input:checked + .status-slider:before {
+            transform: translateX(22px);
+        }
+
+    .btn-save {
+        background: linear-gradient(135deg, #a83232, #c0392b);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 12px 36px;
+        font-weight: 600;
+        font-size: 15px;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(168,50,50,0.3);
+    }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168,50,50,0.4);
+            color: white;
+        }
+
+    .btn-back {
+        border-radius: 10px;
+        padding: 12px 28px;
+        font-weight: 600;
+        font-size: 15px;
+        border: 2px solid #ddd;
+        color: #666;
+        background: white;
+        transition: 0.3s;
+    }
+
+        .btn-back:hover {
+            border-color: #a83232;
+            color: #a83232;
+        }
+</style>
+
+<div class="create-wrapper">
+    <div class="container" style="max-width:820px;">
+        <div class="create-card card">
+
+            <!-- Header -->
+            <div class="create-header">
+                <div class="d-flex align-items-center gap-3">
+                    <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);
+                                border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                        <i class="bi bi-person-plus-fill" style="font-size:22px;color:white;"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 text-white fw-bold">Create New Employee</h4>
+                        <p class="mb-0 text-white" style="opacity:0.75;font-size:13px;">
+                            Fill in the details to add a new employee
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body p-4">
+
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <!-- Photo Upload -->
+                    <div class="text-center mb-4">
+                        <div class="img-preview-wrap mx-auto" onclick="document.getElementById('photoInput').click()">
+                            <img id="imagePreview" src="/images/no-image.png" />
+                        </div>
+                        <p style="font-size:12px;color:#999;margin-top:8px;">
+                            Click to upload photo
+                        </p>
+                        <input type="file" id="photoInput" asp-for="ImageFile"
+                               class="form-control d-none"
+                               onchange="previewImage(event)" />
+                    </div>
+
+                    <!-- Personal Info -->
+                    <div class="section-title mb-3">
+                        <i class="bi bi-person me-1"></i> Personal Information
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Employee Name</label>
+                            <input asp-for="Emp_Name" class="form-control"
+                                   placeholder="Enter employee name" />
+                            <span asp-validation-for="Emp_Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Age</label>
+                            <input asp-for="Emp_Age" class="form-control"
+                                   placeholder="Enter age" />
+                            <span asp-validation-for="Emp_Age" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="border-radius:10px 0 0 10px;border-color:#e0e0e0;">
+                                    <i class="bi bi-envelope" style="color:#a83232;"></i>
+                                </span>
+                                <input type="email" name="Emp_Email" class="form-control"
+                                       placeholder="Enter email"
+                                       style="border-radius:0 10px 10px 0;" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Mobile Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="border-radius:10px 0 0 10px;border-color:#e0e0e0;">
+                                    <i class="bi bi-phone" style="color:#a83232;"></i>
+                                </span>
+                                <input asp-for="Emp_Mobile" class="form-control"
+                                       placeholder="Enter mobile number"
+                                       style="border-radius:0 10px 10px 0;" />
+                            </div>
+                            <span asp-validation-for="Emp_Mobile" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="col-md-6">
+                            <label class="form-label">Gender</label>
+                            <div class="d-flex gap-2 mt-1">
+                                <div class="gender-option">
+                                    <input type="radio" asp-for="Emp_Gender"
+                                           value="Male" id="genderMale" />
+                                    <label class="gender-label" for="genderMale">
+                                        <i class="bi bi-gender-male me-1"></i> Male
+                                    </label>
+                                </div>
+                                <div class="gender-option">
+                                    <input type="radio" asp-for="Emp_Gender"
+                                           value="Female" id="genderFemale" />
+                                    <label class="gender-label" for="genderFemale">
+                                        <i class="bi bi-gender-female me-1"></i> Female
+                                    </label>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Emp_Gender" class="text-danger small"></span>
+                        </div>
+
+                    </div>
+
+                    <!-- Job Info -->
+                    <div class="section-title mb-3">
+                        <i class="bi bi-briefcase me-1"></i> Job Information
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Salary</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="border-radius:10px 0 0 10px;border-color:#e0e0e0;">
+                                    ₹
+                                </span>
+                                <input asp-for="Emp_Salary" class="form-control"
+                                       placeholder="Enter salary"
+                                       style="border-radius:0 10px 10px 0;" />
+                            </div>
+                            <span asp-validation-for="Emp_Salary" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Department</label>
+                            <select asp-for="Dept_Id" asp-items="ViewBag.Departments"
+                                    class="form-select">
+                                <option value="">Select Department</option>
+                            </select>
+                            <span asp-validation-for="Dept_Id" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col-md-12">
+                            <div class="d-flex align-items-center gap-3 p-3"
+                                 style="background:#f8f9fa;border-radius:10px;border:1.5px solid #e0e0e0;">
+                                <label class="status-toggle">
+                                    <input asp-for="Emp_Status" />
+                                    <span class="status-slider"></span>
+                                </label>
+                                <div>
+                                    <div style="font-weight:600;font-size:14px;">Active Employee</div>
+                                    <div style="font-size:12px;color:#888;">
+                                        Toggle to set employee as active or inactive
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-3 mt-4">
+                        <button type="submit" class="btn btn-save">
+                            <i class="bi bi-save-fill me-2"></i> Save Employee
+                        </button>
+                        <a asp-action="Index" class="btn btn-back">
+                            <i class="bi bi-arrow-left me-2"></i> Back
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById('imagePreview').src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+}

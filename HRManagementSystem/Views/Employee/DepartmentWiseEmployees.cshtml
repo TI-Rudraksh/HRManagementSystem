@@ -1,0 +1,115 @@
+﻿@model List<CrudOperation_1.ViewModel.DepartmentEmployeeViewModel>
+
+<style>
+    .employee-card {
+        background: #06283D;
+        border-radius: 12px;
+        padding: 20px;
+        color: white;
+        border: 1px solid rgba(255,255,255,0.1);
+        transition: 0.3s;
+    }
+
+        .employee-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+    .emp-img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .emp-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #2E86C1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .emp-name {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .emp-dept {
+        font-size: 14px;
+        margin: 2px 0;
+        color: #a0d8ff;
+    }
+
+    .emp-info {
+        font-size: 13px;
+        margin: 0;
+        color: #cfd8dc;
+    }
+
+    .dept-header {
+        background: #06283D;
+        border-radius: 10px 10px 0 0;
+        padding: 12px 20px;
+    }
+</style>
+
+<div class="container mt-4">
+    <h3 class="mb-4 fw-bold">Department Wise Employees</h3>
+
+    @foreach (var dept in Model)
+    {
+        <div class="card shadow-sm mb-4 border-0 mb-4">
+            <div class="dept-header text-white">
+                <h5 class="mb-0">@dept.DepartmentName</h5>
+            </div>
+            <div class="card-body" style="background:#0d1b2a; border-radius: 0 0 10px 10px;">
+                <div class="row g-3">
+                    @foreach (var emp in dept.Employees)
+                    {
+                        <div class="col-lg-4 col-md-6">
+                            <div class="employee-card">
+                                <div class="d-flex align-items-center">
+
+                                    @* ✅ FIX: emp.Emp_Image already has full path like /employeeImages/xxx.jpg *@
+                                    @if (!string.IsNullOrEmpty(emp.Emp_Image))
+                                    {
+                                        <img src="@emp.Emp_Image" class="emp-img" />
+                                    }
+                                    else
+                                    {
+                                        <div class="emp-avatar">
+                                            @emp.Emp_Name.Substring(0, 1)
+                                        </div>
+                                    }
+
+                                    <div class="ms-3 flex-grow-1">
+                                        <h5 class="emp-name">@emp.Emp_Name</h5>
+                                        <p class="emp-dept">
+                                            Department : <span>@dept.DepartmentName</span>
+                                        </p>
+                                        <p class="emp-info">Age : @emp.Emp_Age</p>
+                                        <p class="emp-info">Mobile : @emp.Emp_Mobile</p>
+                                        <p class="emp-info" style="color:#4fc3f7; font-weight:600;">
+                                            Salary : ₹@emp.Emp_Salary
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (!dept.Employees.Any())
+                    {
+                        <p class="text-muted ms-2">No employees in this department.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
