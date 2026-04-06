@@ -1,4 +1,4 @@
-using CrudOperation_1.Data;
+using HRManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

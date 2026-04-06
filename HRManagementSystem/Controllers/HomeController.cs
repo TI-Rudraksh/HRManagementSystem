@@ -1,8 +1,8 @@
-using CrudOperation_1.Models;
+using HRManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace CrudOperation_1.Controllers
+namespace HRManagementSystem.Controllers
 {
     public class HomeController : Controller
     {

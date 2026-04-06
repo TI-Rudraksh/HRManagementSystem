@@ -1,7 +1,7 @@
-﻿using CrudOperation_1.Data;
+﻿using HRManagementSystem.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CrudOperation_1.Controllers
+namespace HRManagementSystem.Controllers
 {
     public class NotificationController : Controller
     {

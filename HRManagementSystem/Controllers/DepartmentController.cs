@@ -1,9 +1,9 @@
-﻿using CrudOperation_1.Data;
-using CrudOperation_1.Models;
+﻿using HRManagementSystem.Data;
+using HRManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrudOperation_1.Controllers
+namespace HRManagementSystem.Controllers
 {
     public class DepartmentController : Controller
     {

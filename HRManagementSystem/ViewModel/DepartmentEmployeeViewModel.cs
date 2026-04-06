@@ -1,6 +1,6 @@
-﻿using CrudOperation_1.Models;
+﻿using HRManagementSystem.Models;
 
-namespace CrudOperation_1.ViewModel
+namespace HRManagementSystem.ViewModel
 {
     public class DepartmentEmployeeViewModel
     {

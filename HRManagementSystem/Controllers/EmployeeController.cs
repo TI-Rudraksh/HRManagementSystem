@@ -1,11 +1,11 @@
-﻿using CrudOperation_1.Data;
-using CrudOperation_1.Models;
-using CrudOperation_1.ViewModel;
+﻿using HRManagementSystem.Data;
+using HRManagementSystem.Models;
+using HRManagementSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrudOperation_1.Controllers
+namespace HRManagementSystem.Controllers
 {
     public class EmployeeController : Controller
     {

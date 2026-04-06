@@ -1,7 +1,7 @@
-﻿using CrudOperation_1.Models;
+﻿using HRManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrudOperation_1.Data
+namespace HRManagementSystem.Data
 {
     public class DB : DbContext
     {

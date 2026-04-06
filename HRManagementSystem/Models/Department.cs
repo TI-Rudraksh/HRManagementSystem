@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CrudOperation_1.Models
+namespace HRManagementSystem.Models
 {
     public class Department
     {

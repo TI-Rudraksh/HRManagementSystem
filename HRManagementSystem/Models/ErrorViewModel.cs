@@ -1,4 +1,4 @@
-namespace CrudOperation_1.Models
+namespace HRManagementSystem.Models
 {
     public class ErrorViewModel
     {
