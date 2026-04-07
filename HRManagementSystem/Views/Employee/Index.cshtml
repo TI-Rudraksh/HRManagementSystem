@@ -1,110 +1,166 @@
-﻿@model List<HRManagementSystem.Models.Employee>
+@model List<HRManagementSystem.Models.Employee>
 
-<link rel="stylesheet" href="~/css/employee/index.css"/>
+@{
+    ViewData["Title"] = "Employees";
+}
 
-
-<div class="container-fluid">
-
-    <!-- Page Header -->
-    <div class="page-header d-flex justify-content-between align-items-center">
-        <div>
-            <h4 class="mb-1 fw-bold">
-                <i class="bi bi-people-fill me-2"></i> Employee List
-            </h4>
-            <p class="mb-0" style="opacity:0.8; font-size:13px;">
-                Total @Model.Count() employees
-            </p>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-            <!-- Search -->
-            <div style="position:relative;">
-                <i class="bi bi-search" style="position:absolute;left:12px;top:50%;
-                   transform:translateY(-50%);color:#aaa;"></i>
-                <input type="text" id="searchInput" class="search-box"
-                       placeholder="Search employee..."
-                       style="padding-left:36px;"
-                       onkeyup="searchEmployees()" />
-            </div>
-            <!-- Add Button -->
-            <a asp-action="Create"
-               style="background:white;color:#a83232;border-radius:10px;
-                      padding:10px 20px;font-weight:600;font-size:14px;
-                      text-decoration:none;border:2px solid white;transition:0.3s;"
-               onmouseover="this.style.background='transparent';this.style.color='white';"
-               onmouseout="this.style.background='white';this.style.color='#a83232';">
-                <i class="bi bi-person-plus-fill me-1"></i> Add Employee
-            </a>
-        </div>
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Employees</h1>
+        <p class="page-subtitle">Manage employee records efficiently</p>
     </div>
+    <div class="header-actions">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-person-plus me-2"></i> Add Employee
+        </a>
+    </div>
+</div>
 
-    <!-- Cards -->
-    <div class="row g-4" id="employeeGrid">
-        @foreach (var emp in Model)
-        {
-            <div class="col-lg-4 col-md-6 emp-item">
-                <div class="employee-card"
-                     onclick="window.location='@Url.Action("Edit", "Employee", new { id = emp.Emp_Id })'"
-                     style="cursor:pointer;">
-
-                    <!-- Status Badge -->
-                    <span class="status-badge @(emp.Emp_Status ? "active" : "inactive")">
-                        <span class="status-dot @(emp.Emp_Status ? "status-active" : "status-inactive")"></span>
-                        @(emp.Emp_Status ? "Active" : "Inactive")
+<div class="card mb-4 overflow-hidden border-0 shadow-sm" style="border-radius: 1rem;">
+    <div class="card-body p-4">
+        <!-- Filters Area -->
+        <div class="row g-3 align-items-center">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search text-muted"></i>
                     </span>
-
-                    <!-- Top: Avatar + Name -->
-                    <div class="d-flex align-items-center gap-3">
-                        @if (!string.IsNullOrEmpty(emp.Emp_Image))
-                        {
-                            <img src="@emp.Emp_Image" class="emp-img" />
-                        }
-                        else
-                        {
-                            <div class="emp-avatar">
-                                @emp.Emp_Name.Substring(0, 1)
-                            </div>
-                        }
-                        <div>
-                            <h5 class="emp-name">@emp.Emp_Name</h5>
-                            <span class="emp-dept-badge">
-                                <i class="bi bi-buildings me-1"></i>
-                                @emp.Department?.DepartmentName
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <!-- Info Rows -->
-                    <div class="emp-info-row">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Age : @emp.Emp_Age</span>
-                    </div>
-                    <div class="emp-info-row">
-                        <i class="bi bi-phone"></i>
-                        <span>@emp.Emp_Mobile</span>
-                    </div>
-                    <div class="emp-info-row">
-                        <i class="bi bi-envelope-fill"></i>
-                        <span>@emp.Emp_Email</span>
-                    </div>
-
+                    <input type="text" id="employeeSearch" class="form-control border-start-0" placeholder="Search by name or ID..." onkeyup="filterTable()">
                 </div>
             </div>
-        }
+            <div class="col-md-3">
+                <select id="deptFilter" class="form-select" onchange="filterTable()">
+                    <option value="">All Departments</option>
+                    @foreach (var dept in Model.Select(e => e.Department?.DepartmentName).Distinct().Where(d => d != null))
+                    {
+                        <option value="@dept">@dept</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select id="statusFilter" class="form-select" onchange="filterTable()">
+                    <option value="">All Statuses</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="col-md-1 text-end">
+                <button class="btn btn-outline-secondary" onclick="resetFilters()" title="Reset Filters">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                </button>
+            </div>
+        </div>
     </div>
+</div>
 
+<div class="card border-0 shadow-sm" style="border-radius: 1rem; overflow: hidden;">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0" id="employeeTable">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th class="text-center-align">Employee ID</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Joining Date</th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                @if (!string.IsNullOrEmpty(emp.Emp_Image))
+                                {
+                                    <img src="@emp.Emp_Image" class="rounded-circle me-3" width="40" height="40" style="object-fit: cover; border: 2px solid #f1f5f9;" />
+                                }
+                                else
+                                {
+                                    <div class="bg-light text-primary rounded-circle d-flex align-items-center justify-content-center me-3 fw-bold" style="width: 40px; height: 40px; border: 2px solid #f1f5f9;">
+                                        @emp.Emp_Name.Substring(0, 1)
+                                    </div>
+                                }
+                                <div>
+                                    <div class="fw-bold text-dark">@emp.Emp_Name</div>
+                                    <div class="small text-muted">@emp.Emp_Email</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center-align">
+                            <span class="badge bg-light text-dark fw-normal border">#@emp.Emp_Id</span>
+                        </td>
+                        <td>
+                            <span class="text-dark">@(emp.Department?.DepartmentName ?? "N/A")</span>
+                        </td>
+                        <td>
+                            <span class="text-muted">Staff</span> <!-- Placeholder Role -->
+                        </td>
+                        <td>
+                            @if (emp.Emp_Status)
+                            {
+                                <span class="badge badge-active">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-inactive">Inactive</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="text-muted small">01 Jan 2024</span> <!-- Placeholder Joining Date -->
+                        </td>
+                        <td class="actions-column">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a asp-action="Edit" asp-route-id="@emp.Emp_Id" class="btn btn-sm btn-outline-light text-primary border" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@emp.Emp_Id" class="btn btn-sm btn-outline-light text-danger border" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 @section Scripts {
     <script>
-        function searchEmployees() {
-            var input = document.getElementById('searchInput').value.toLowerCase();
-            var items = document.querySelectorAll('.emp-item');
-            items.forEach(function (item) {
-                var text = item.innerText.toLowerCase();
-                item.style.display = text.includes(input) ? '' : 'none';
-            });
+        function filterTable() {
+            var searchInput = document.getElementById("employeeSearch").value.toLowerCase();
+            var deptFilter = document.getElementById("deptFilter").value;
+            var statusFilter = document.getElementById("statusFilter").value;
+            
+            var table = document.getElementById("employeeTable");
+            var rows = table.getElementsByTagName("tr");
+
+            for (var i = 1; i < rows.length; i++) {
+                var nameText = rows[i].cells[0].textContent.toLowerCase();
+                var idText = rows[i].cells[1].textContent.toLowerCase();
+                var deptText = rows[i].cells[2].textContent;
+                var statusText = rows[i].cells[4].textContent;
+                
+                var matchesSearch = nameText.includes(searchInput) || idText.includes(searchInput);
+                var matchesDept = deptFilter === "" || deptText.includes(deptFilter);
+                var matchesStatus = statusFilter === "" || statusText.trim() === statusFilter;
+
+                if (matchesSearch && matchesDept && matchesStatus) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById("employeeSearch").value = "";
+            document.getElementById("deptFilter").value = "";
+            document.getElementById("statusFilter").value = "";
+            filterTable();
         }
     </script>
 }

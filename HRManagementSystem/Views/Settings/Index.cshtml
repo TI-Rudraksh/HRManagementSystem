@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "System Settings";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">System Settings</h1>
+        <p class="page-subtitle">Configure application preferences</p>
+    </div>
+</div>
+
+<div class="row g-4 mt-2">
+    <!-- Company Info -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom-0">
+                <h5 class="card-title fw-bold">Company Information</h5>
+            </div>
+            <div class="card-body p-4 pt-0">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Company Name</label>
+                        <input type="text" class="form-control" value="Techies Infotech">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Address</label>
+                        <textarea class="form-control" rows="2">123 Business Avenue, Suite 100, Silicon Valley</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leave Policy -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom-0">
+                <h5 class="card-title fw-bold">Leave Policy Configuration</h5>
+            </div>
+            <div class="card-body p-4 pt-0">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Annual Leave (Days)</label>
+                        <input type="number" class="form-control" value="18">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Sick Leave (Days)</label>
+                        <input type="number" class="form-control" value="10">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payroll Rules -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom-0">
+                <h5 class="card-title fw-bold">Payroll Rules</h5>
+            </div>
+            <div class="card-body p-4 pt-0">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Tax Percentage (%)</label>
+                        <input type="number" class="form-control" value="15">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Deduction Rule</label>
+                        <select class="form-select">
+                            <option>Monthly</option>
+                            <option>Semi-Monthly</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom-0">
+                <h5 class="card-title fw-bold">Email Notification Settings</h5>
+            </div>
+            <div class="card-body p-4 pt-0">
+                <form>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="leaveNotif" checked>
+                        <label class="form-check-label small" for="leaveNotif">Email on leave approval</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="payrollNotif" checked>
+                        <label class="form-check-label small" for="payrollNotif">Email on payslip generation</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

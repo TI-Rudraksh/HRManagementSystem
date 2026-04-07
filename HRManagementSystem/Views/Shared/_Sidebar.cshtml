@@ -1,0 +1,96 @@
+@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<aside class="sidebar">
+    <div class="sidebar-header py-4 px-3">
+        <a href="/" class="d-block text-center text-decoration-none">
+            <img src="~/images/logo.png" alt="Techies Infotech" class="img-fluid" style="max-height: 80px; max-width: 180px;" asp-append-version="true">
+        </a>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Employee" ? "active" : "")" asp-controller="Employee" asp-action="Index">
+                    <i class="bi bi-people"></i>
+                    <span>Employees</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Department" ? "active" : "")" asp-controller="Department" asp-action="Index">
+                    <i class="bi bi-building"></i>
+                    <span>Departments</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Attendance" ? "active" : "")" asp-controller="Attendance" asp-action="Index">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Attendance</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Payroll" ? "active" : "")" asp-controller="Payroll" asp-action="Index">
+                    <i class="bi bi-bank"></i>
+                    <span>Payroll</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Appraisal" ? "active" : "")" asp-controller="Appraisal" asp-action="Index">
+                    <i class="bi bi-graph-up"></i>
+                    <span>Appraisal</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Reimbursement" ? "active" : "")" asp-controller="Reimbursement" asp-action="Index">
+                    <i class="bi bi-cash-stack"></i>
+                    <span>Reimbursement</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Tasks" ? "active" : "")" asp-controller="Tasks" asp-action="Index">
+                    <i class="bi bi-clipboard-check"></i>
+                    <span>Tasks</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Roles" ? "active" : "")" asp-controller="Roles" asp-action="Index">
+                    <i class="bi bi-shield-lock"></i>
+                    <span>Roles & Permissions</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Documents" ? "active" : "")" asp-controller="Documents" asp-action="Index">
+                    <i class="bi bi-folder2-open"></i>
+                    <span>Documents</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Holidays" ? "active" : "")" asp-controller="Holidays" asp-action="Index">
+                    <i class="bi bi-calendar-heart"></i>
+                    <span>Holiday Calendar</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Settings" ? "active" : "")" asp-controller="Settings" asp-action="Index">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="mt-auto p-3">
+         <a class="nav-link text-danger border-top pt-3 mt-2" asp-controller="Account" asp-action="Logout">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>

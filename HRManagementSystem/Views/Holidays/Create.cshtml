@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Add Holiday";
+}
+
+<form>
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Add Holiday</h1>
+            <p class="page-subtitle">Define a new company holiday</p>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Index" class="btn btn-outline-secondary me-2">Cancel</a>
+            <button type="submit" class="btn btn-primary">Create Holiday</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card border-0 shadow-sm" style="border-radius: 1rem;">
+                <div class="card-header bg-white p-4">
+                    <h5 class="card-title fw-bold">Holiday Detail</h5>
+                </div>
+                <div class="card-body p-4 pt-0">
+                    <div class="row g-3">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label small fw-bold text-muted">Holiday Name</label>
+                            <input type="text" class="form-control" placeholder="e.g. Independence Day">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-muted">Holiday Date</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold text-muted">Holiday Type</label>
+                            <select class="form-select">
+                                <option>National</option>
+                                <option>Optional</option>
+                                <option>Regional</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label small fw-bold text-muted">Status</label>
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Enable Holiday</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

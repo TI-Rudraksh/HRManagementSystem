@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Reimbursements";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Reimbursements</h1>
+        <p class="page-subtitle">Review and manage employee reimbursement requests</p>
+    </div>
+    <div class="header-actions">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus me-2"></i> Submit Request
+        </a>
+    </div>
+</div>
+
+<div class="card mb-4 border-0 shadow-sm" style="border-radius: 1rem;">
+    <div class="card-body p-4">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option value="">All Statuses</option>
+                    <option>Pending</option>
+                    <option>Approved</option>
+                    <option>Rejected</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Select Date Range...">
+            </div>
+            <div class="col-md-4 text-end">
+                <button class="btn btn-outline-primary">
+                    <i class="bi bi-funnel me-2"></i> Filter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm" style="border-radius: 1rem; overflow: hidden;">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th class="text-center-align">Amount</th>
+                    <th>Category</th>
+                    <th>Submitted Date</th>
+                    <th>Status</th>
+                    <th>Approved By</th>
+                    <th class="text-center-align">Bill</th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td class="text-center-align fw-bold">$125.50</td>
+                    <td>Travel Allowance</td>
+                    <td>15 May 2024</td>
+                    <td><span class="badge bg-warning bg-opacity-10 text-warning">Pending</span></td>
+                    <td><span class="text-muted small">N/A</span></td>
+                    <td class="text-center-align"><i class="bi bi-file-earmark-image text-primary"></i></td>
+                    <td class="actions-column">
+                        <button class="btn btn-sm btn-success"><i class="bi bi-check-lg"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="bi bi-x-lg"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

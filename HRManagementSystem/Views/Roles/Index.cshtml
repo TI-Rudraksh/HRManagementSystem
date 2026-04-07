@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "Roles & Permissions";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Roles & Permissions</h1>
+        <p class="page-subtitle">Configure system access control</p>
+    </div>
+    <div class="header-actions">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-shield-plus me-2"></i> Add Role
+        </a>
+    </div>
+</div>
+
+<!-- Roles Card -->
+<div class="card border-0 shadow-sm mb-4" style="border-radius: 1rem; overflow: hidden;">
+    <div class="card-header bg-white p-4">
+        <h5 class="card-title fw-bold">User Roles</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Role Name</th>
+                    <th class="text-center-align">Total Users</th>
+                    <th>Created Date</th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="fw-bold text-primary">Administrator</span></td>
+                    <td class="text-center-align"><span class="badge bg-light text-dark border">3</span></td>
+                    <td>01 Jan 2024</td>
+                    <td class="actions-column">
+                        <button class="btn btn-sm btn-outline-light text-primary border"><i class="bi bi-pencil"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="fw-bold">HR Manager</span></td>
+                    <td class="text-center-align"><span class="badge bg-light text-dark border">5</span></td>
+                    <td>05 Jan 2024</td>
+                    <td class="actions-column">
+                        <button class="btn btn-sm btn-outline-light text-primary border"><i class="bi bi-pencil"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Permissions Card -->
+<div class="card border-0 shadow-sm" style="border-radius: 1rem; overflow: hidden;">
+    <div class="card-header bg-white p-4 border-bottom">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title fw-bold mb-0">Module Permissions</h5>
+            <a asp-action="Assign" class="btn btn-sm btn-outline-primary">Assign Permission</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Permission Name</th>
+                    <th>Module</th>
+                    <th>Assigned Roles</th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>View Employee Records</td>
+                    <td>Employees</td>
+                    <td>
+                        <span class="badge bg-primary bg-opacity-10 text-primary me-1">Admin</span>
+                        <span class="badge bg-primary bg-opacity-10 text-primary me-1">HR</span>
+                        <span class="badge bg-primary bg-opacity-10 text-primary">Manager</span>
+                    </td>
+                    <td class="actions-column">
+                        <button class="btn btn-sm btn-link text-muted"><i class="bi bi-gear"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Process Payroll</td>
+                    <td>Payroll</td>
+                    <td>
+                        <span class="badge bg-primary bg-opacity-10 text-primary me-1">Admin</span>
+                        <span class="badge bg-primary bg-opacity-10 text-primary">HR</span>
+                    </td>
+                    <td class="actions-column">
+                        <button class="btn btn-sm btn-link text-muted"><i class="bi bi-gear"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

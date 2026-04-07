@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Holiday Calendar";
+}
+
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Holiday Calendar</h1>
+        <p class="page-subtitle">Manage company holidays</p>
+    </div>
+    <div class="header-actions">
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-calendar-plus me-2"></i> Add Holiday
+        </a>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm" style="border-radius: 1rem; overflow: hidden;">
+    <div class="card-header bg-white p-4">
+        <h5 class="card-title fw-bold">Upcoming Holidays</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Holiday Name</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Created By</th>
+                    <th class="actions-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="fw-bold text-primary">
+                    <td>Independence Day</td>
+                    <td>15 Aug 2024</td>
+                    <td><span class="badge bg-primary bg-opacity-10 text-primary">National</span></td>
+                    <td>Admin</td>
+                    <td class="actions-column">
+                        <button class="btn btn-sm btn-outline-light text-danger border"><i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Employee Day</td>
+                    <td>01 May 2024</td>
+                    <td><span class="badge bg-info bg-opacity-10 text-info">Optional</span></td>
+                    <td>HR</td>
+                    <td class="actions-column">
+                        <button class="btn btn-sm btn-outline-light text-danger border"><i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
