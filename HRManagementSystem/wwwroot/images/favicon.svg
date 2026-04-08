@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <!-- Thicker stroke widths specifically optimized for high legibility at 16x16 / 32x32 favicon browser sizes -->
+    <path d="M40 85 L15 70 L15 30 L50 10 L85 30 L85 70 L60 85" fill="none" stroke="#0072bc" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M50 85 L50 35 M30 52 L50 35 L70 52" fill="none" stroke="#0072bc" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
