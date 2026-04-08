@@ -32,6 +32,39 @@
     </main>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <partial name="_DeleteModal" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebarNav = document.querySelector('.sidebar-nav');
+            let scrollTimeout;
+            
+            if (sidebarNav) {
+                sidebarNav.addEventListener('scroll', function () {
+                    sidebarNav.classList.add('is-scrolling');
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(function () {
+                        sidebarNav.classList.remove('is-scrolling');
+                    }, 1500);
+                });
+            }
+
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('sidebar-collapsed');
+                    if(document.body.classList.contains('sidebar-collapsed')) {
+                        localStorage.setItem('sidebarState', 'collapsed');
+                    } else {
+                        localStorage.setItem('sidebarState', 'expanded');
+                    }
+                });
+
+                if(localStorage.getItem('sidebarState') === 'collapsed') {
+                    document.body.classList.add('sidebar-collapsed');
+                }
+            }
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

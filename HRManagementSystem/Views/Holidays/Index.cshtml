@@ -36,7 +36,7 @@
                     <td><span class="badge bg-primary bg-opacity-10 text-primary">National</span></td>
                     <td>Admin</td>
                     <td class="actions-column">
-                        <button class="btn btn-sm btn-outline-light text-danger border"><i class="bi bi-trash"></i></button>
+                        <button class="btn btn-sm btn-outline-light text-danger border" onclick="confirmDelete('@Url.Action("Delete", "Holidays", new { id = 1 })', 'Holiday')" title="Delete"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
                 <tr>
@@ -45,7 +45,7 @@
                     <td><span class="badge bg-info bg-opacity-10 text-info">Optional</span></td>
                     <td>HR</td>
                     <td class="actions-column">
-                        <button class="btn btn-sm btn-outline-light text-danger border"><i class="bi bi-trash"></i></button>
+                        <button class="btn btn-sm btn-outline-light text-danger border" onclick="confirmDelete('@Url.Action("Delete", "Holidays", new { id = 2 })', 'Holiday')" title="Delete"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             </tbody>

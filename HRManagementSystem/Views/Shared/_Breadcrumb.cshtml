@@ -2,17 +2,27 @@
     var controller = ViewContext.RouteData.Values["controller"]?.ToString();
     var action = ViewContext.RouteData.Values["action"]?.ToString();
     var pageTitle = ViewData["Title"] ?? controller ?? "Dashboard";
+    var showBack = !(controller == "Home" && action == "Index");
 }
 
-<div class="h5 m-0 fw-bold text-dark">@pageTitle</div>
-<nav class="page-breadcrumb" aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        @if (controller != "Home" && controller != null) {
-            <li class="breadcrumb-item"><a asp-controller="@controller" asp-action="Index">@controller</a></li>
-        }
-        @if (action != "Index" && action != null) {
-            <li class="breadcrumb-item active" aria-current="page">@action</li>
-        }
-    </ol>
-</nav>
+<div class="d-flex align-items-center gap-3">
+    @if (showBack) {
+        <a href="javascript:history.back()" class="btn btn-white bg-white border border-secondary border-opacity-25 rounded-circle d-flex align-items-center justify-content-center shadow-sm text-dark transition-all" style="width: 40px; height: 40px;" title="Go Back" onmouseover="this.classList.add('bg-light')" onmouseout="this.classList.remove('bg-light')">
+            <i class="bi bi-arrow-left fs-5"></i>
+        </a>
+    }
+    <div>
+        <div class="h5 m-0 fw-bold text-dark">@pageTitle</div>
+        <nav class="page-breadcrumb" aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                @if (controller != "Home" && controller != null) {
+                    <li class="breadcrumb-item"><a asp-controller="@controller" asp-action="Index">@controller</a></li>
+                }
+                @if (action != "Index" && action != null) {
+                    <li class="breadcrumb-item active" aria-current="page">@action</li>
+                }
+            </ol>
+        </nav>
+    </div>
+</div>

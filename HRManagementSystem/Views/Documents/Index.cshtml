@@ -61,7 +61,7 @@
                     <td><span class="badge bg-success bg-opacity-10 text-success">Verified</span></td>
                     <td class="actions-column">
                         <button class="btn btn-sm btn-outline-light border text-primary"><i class="bi bi-download"></i></button>
-                        <button class="btn btn-sm btn-outline-light border text-danger"><i class="bi bi-trash"></i></button>
+                        <button class="btn btn-sm btn-outline-light border text-danger" onclick="confirmDelete('@Url.Action("Delete", "Documents", new { id = 1 })', 'Document')" title="Delete"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             </tbody>

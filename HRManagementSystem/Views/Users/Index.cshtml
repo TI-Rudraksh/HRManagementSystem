@@ -1,0 +1,198 @@
+@{
+    ViewData["Title"] = "Users";
+}
+
+<style>
+    /* Table specific overwrites */
+    .table > :not(caption) > * > * {
+        padding: 1rem 1.25rem;
+    }
+    .btn-light {
+        background-color: #f8fafc;
+        border-color: #e5e7eb;
+    }
+    .btn-light:hover {
+        background-color: #f1f5f9;
+        border-color: #d1d5db;
+    }
+</style>
+
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1 class="page-title">Users</h1>
+        <div class="breadcrumb-container">
+            <div class="page-breadcrumb">
+                <a href="#">Dashboard</a> / <span class="text-dark fw-medium">Users</span>
+            </div>
+        </div>
+        <p class="page-subtitle mt-2">Manage system login accounts and role-based access</p>
+    </div>
+    <div>
+        <a href="@Url.Action("Create", "Users")" class="btn btn-primary d-flex align-items-center gap-2 rounded-3 shadow-sm py-2 px-3">
+            <i class="bi bi-plus-lg"></i> Add User
+        </a>
+    </div>
+</div>
+
+<!-- Filters Card -->
+<div class="card mb-4 border-0 shadow-sm">
+    <div class="card-body p-3">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white text-muted border-end-0 ps-3">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0 ps-2" placeholder="Search by name or email...">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select">
+                    <option value="">All Roles</option>
+                    <option value="Super Admin">Super Admin</option>
+                    <option value="Admin">Admin</option>
+                    <option value="HR">HR</option>
+                    <option value="Employee">Employee</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select">
+                    <option value="">All Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Table Card -->
+<div class="card border-0 shadow-sm overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0 text-start">
+            <thead class="bg-light">
+                <tr>
+                    <th class="text-start">User Name</th>
+                    <th class="text-start">Email Address</th>
+                    <th class="text-start">Assigned Role</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Created Date</th>
+                    <th class="text-end pe-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample Row 1 -->
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">
+                                RJ
+                            </div>
+                            <span class="fw-semibold text-dark">Rudraksh Jani</span>
+                        </div>
+                    </td>
+                    <td class="text-muted">rudraksh@techies.com</td>
+                    <td><span class="fw-medium text-dark">Super Admin</span></td>
+                    <td class="text-center">
+                        <span class="badge badge-active border border-success border-opacity-25 pb-1">Active</span>
+                    </td>
+                    <td class="text-center text-muted small">05 Apr 2026</td>
+                    <td class="text-end pe-4">
+                        <div class="d-flex justify-content-end gap-1">
+                            <a href="@Url.Action("Edit", "Users", new { id = 1 })" class="btn btn-sm btn-light text-primary" data-bs-toggle="tooltip" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-light text-primary" data-bs-toggle="tooltip" title="Reset Password" data-bs-target="#resetPasswordModal" data-bs-toggle="modal">
+                                <i class="bi bi-key"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light text-warning" data-bs-toggle="tooltip" title="Deactivate">
+                                <i class="bi bi-person-x"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light text-danger" title="Delete" onclick="confirmDelete('@Url.Action("Delete", "Users", new { id = 1 })', 'User')">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Sample Row 2 -->
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-secondary bg-opacity-10 text-secondary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">
+                                JD
+                            </div>
+                            <span class="fw-semibold text-dark">John Doe</span>
+                        </div>
+                    </td>
+                    <td class="text-muted">john.doe@techies.com</td>
+                    <td><span class="fw-medium text-dark">HR</span></td>
+                    <td class="text-center">
+                        <span class="badge badge-inactive border border-danger border-opacity-25 pb-1">Inactive</span>
+                    </td>
+                    <td class="text-center text-muted small">01 Apr 2026</td>
+                    <td class="text-end pe-4">
+                        <div class="d-flex justify-content-end gap-1">
+                            <a href="@Url.Action("Edit", "Users", new { id = 2 })" class="btn btn-sm btn-light text-primary" data-bs-toggle="tooltip" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-light text-primary" data-bs-toggle="tooltip" title="Reset Password" data-bs-target="#resetPasswordModal" data-bs-toggle="modal">
+                                <i class="bi bi-key"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light text-success" data-bs-toggle="tooltip" title="Activate">
+                                <i class="bi bi-person-check"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light text-danger" title="Delete" onclick="confirmDelete('@Url.Action("Delete", "Users", new { id = 2 })', 'User')">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Reset Password Modal -->
+<div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow border-0">
+      <div class="modal-header border-bottom py-3">
+        <h5 class="modal-title fw-semibold fs-5" id="resetPasswordModalLabel">Reset User Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form>
+            <div class="mb-3">
+                <label class="form-label text-dark fw-medium small text-uppercase shadow-none border-0 px-0 ps-1 pb-1">New Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" class="form-control border-start-0 ps-1" placeholder="Enter new password">
+                </div>
+            </div>
+            <div class="mb-4 pb-2">
+                <label class="form-label text-dark fw-medium small text-uppercase shadow-none border-0 px-0 ps-1 pb-1">Confirm Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" class="form-control border-start-0 ps-1" placeholder="Confirm new password">
+                </div>
+            </div>
+            <div class="d-flex justify-content-end gap-2 border-top pt-3 mt-1">
+                <button type="button" class="btn btn-outline-secondary rounded-3 border px-4" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary rounded-3 px-4 shadow-sm">Update Password</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}

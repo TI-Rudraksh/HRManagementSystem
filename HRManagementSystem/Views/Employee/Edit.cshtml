@@ -1,198 +1,159 @@
-﻿@model HRManagementSystem.Models.Employee
+@model HRManagementSystem.Models.Employee
 
 @{
     ViewData["Title"] = "Edit Employee";
 }
 
-<link rel="stylesheet" href="~/css/employee/edit.css"/>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Emp_Id" />
+    <input type="hidden" asp-for="Emp_Image" />
 
-<div class="create-wrapper">
-    <div class="container" style="max-width:820px;">
-        <div class="create-card card">
+    <div class="page-header border-bottom pb-4 mb-4">
+        <div>
+            <h1 class="page-title">Edit Employee</h1>
+            <div class="breadcrumb-container">
+                <div class="page-breadcrumb">
+                    <a href="/">Dashboard</a> / <a asp-action="Index">Employees</a> / <span class="text-dark fw-medium">Edit Employee</span>
+                </div>
+            </div>
+            <p class="page-subtitle mt-2 mb-0">Update information for @Model.Emp_Name</p>
+        </div>
+        <div class="header-actions">
+            <a asp-action="Index" class="btn btn-outline-secondary me-2">Cancel</a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check2 me-2"></i> Update Employee
+            </button>
+        </div>
+    </div>
 
-            <!-- Header -->
-            <div class="create-header">
-                <div class="d-flex align-items-center gap-3">
-                    <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);
-                                border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                        <i class="bi bi-pencil-fill" style="font-size:22px;color:white;"></i>
-                    </div>
-                    <div>
-                        <h4 class="mb-0 text-white fw-bold">Edit Employee</h4>
-                        <p class="mb-0 text-white" style="opacity:0.75;font-size:13px;">
-                            Update details for @Model.Emp_Name
-                        </p>
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Personal Information -->
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 1rem;">
+                <div class="card-header bg-white p-4">
+                    <h5 class="card-title fw-bold">Personal Information</h5>
+                </div>
+                <div class="card-body p-4 pt-0">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Emp_Name" class="form-label small fw-bold">Full Name</label>
+                            <input asp-for="Emp_Name" class="form-control" placeholder="e.g. John Doe">
+                            <span asp-validation-for="Emp_Name" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Emp_Email" class="form-label small fw-bold">Email Address</label>
+                            <input asp-for="Emp_Email" class="form-control" placeholder="john.doe@company.com">
+                            <span asp-validation-for="Emp_Email" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Emp_Mobile" class="form-label small fw-bold">Mobile Number</label>
+                            <input asp-for="Emp_Mobile" class="form-control" placeholder="+1 234 567 890">
+                            <span asp-validation-for="Emp_Mobile" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="Emp_Age" class="form-label small fw-bold">Age</label>
+                            <input asp-for="Emp_Age" class="form-control">
+                            <span asp-validation-for="Emp_Age" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="Emp_Gender" class="form-label small fw-bold">Gender</label>
+                            <select asp-for="Emp_Gender" class="form-select">
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <span asp-validation-for="Emp_Gender" class="text-danger small"></span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Body -->
-            <div class="card-body p-4">
-                <form asp-action="Edit" method="post" enctype="multipart/form-data">
-
-                    <input type="hidden" asp-for="Emp_Id" />
-                    <input type="hidden" asp-for="Emp_Image" />
-
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-                    <!-- Photo -->
-                    <div class="text-center mb-4">
-                        <div class="img-preview-wrap mx-auto"
-                             onclick="document.getElementById('photoInput').click()">
-                            <img id="imagePreview"
-                                 src="@(string.IsNullOrEmpty(Model.Emp_Image) ? "/images/no-image.png" : Model.Emp_Image)" />
-                        </div>
-                        <p style="font-size:12px;color:#999;margin-top:8px;">
-                            Click to change photo
-                        </p>
-                        <input type="file" id="photoInput" asp-for="ImageFile"
-                               class="form-control d-none"
-                               onchange="previewImage(event)" />
-                    </div>
-
-                    <!-- Personal Info -->
-                    <div class="section-title">
-                        <i class="bi bi-person me-1"></i> Personal Information
-                    </div>
-
-                    <div class="row g-3 mb-4">
+            <!-- Job Details -->
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 1rem;">
+                <div class="card-header bg-white p-4">
+                    <h5 class="card-title fw-bold">Employment Details</h5>
+                </div>
+                <div class="card-body p-4 pt-0">
+                    <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label">Employee Name</label>
-                            <input asp-for="Emp_Name" class="form-control"
-                                   placeholder="Enter employee name" />
-                            <span asp-validation-for="Emp_Name" class="text-danger small"></span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">Age</label>
-                            <input asp-for="Emp_Age" class="form-control"
-                                   placeholder="Enter age" />
-                            <span asp-validation-for="Emp_Age" class="text-danger small"></span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">Email</label>
-                            <div class="input-group">
-                                <span class="input-group-text"
-                                      style="border-radius:10px 0 0 10px;border-color:#e0e0e0;">
-                                    <i class="bi bi-envelope" style="color:#a83232;"></i>
-                                </span>
-                                <input asp-for="Emp_Email" class="form-control"
-                                       placeholder="Enter email"
-                                       style="border-radius:0 10px 10px 0;" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">Mobile Number</label>
-                            <div class="input-group">
-                                <span class="input-group-text"
-                                      style="border-radius:10px 0 0 10px;border-color:#e0e0e0;">
-                                    <i class="bi bi-phone" style="color:#a83232;"></i>
-                                </span>
-                                <input asp-for="Emp_Mobile" class="form-control"
-                                       placeholder="Enter mobile"
-                                       style="border-radius:0 10px 10px 0;" />
-                            </div>
-                            <span asp-validation-for="Emp_Mobile" class="text-danger small"></span>
-                        </div>
-
-                        <!-- Gender -->
-                        <div class="col-md-6">
-                            <label class="form-label">Gender</label>
-                            <div class="d-flex gap-2 mt-1">
-                                <div class="gender-option">
-                                    <input type="radio" asp-for="Emp_Gender"
-                                           value="Male" id="genderMale" />
-                                    <label class="gender-label" for="genderMale">
-                                        <i class="bi bi-gender-male me-1"></i> Male
-                                    </label>
-                                </div>
-                                <div class="gender-option">
-                                    <input type="radio" asp-for="Emp_Gender"
-                                           value="Female" id="genderFemale" />
-                                    <label class="gender-label" for="genderFemale">
-                                        <i class="bi bi-gender-female me-1"></i> Female
-                                    </label>
-                                </div>
-                            </div>
-                            <span asp-validation-for="Emp_Gender" class="text-danger small"></span>
-                        </div>
-
-                    </div>
-
-                    <!-- Job Info -->
-                    <div class="section-title">
-                        <i class="bi bi-briefcase me-1"></i> Job Information
-                    </div>
-
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                            <label class="form-label">Salary</label>
-                            <div class="input-group">
-                                <span class="input-group-text"
-                                      style="border-radius:10px 0 0 10px;border-color:#e0e0e0;">₹</span>
-                                <input asp-for="Emp_Salary" class="form-control"
-                                       placeholder="Enter salary"
-                                       style="border-radius:0 10px 10px 0;" />
-                            </div>
-                            <span asp-validation-for="Emp_Salary" class="text-danger small"></span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label class="form-label">Department</label>
-                            <select asp-for="Dept_Id" asp-items="ViewBag.Departments"
-                                    class="form-select">
+                            <label asp-for="Dept_Id" class="form-label small fw-bold">Department</label>
+                            <select asp-for="Dept_Id" asp-items="ViewBag.Departments" class="form-select">
                                 <option value="">Select Department</option>
                             </select>
                             <span asp-validation-for="Dept_Id" class="text-danger small"></span>
                         </div>
-
-                        <!-- Status -->
-                        <div class="col-md-12">
-                            <div class="d-flex align-items-center gap-3 p-3"
-                                 style="background:#f8f9fa;border-radius:10px;border:1.5px solid #e0e0e0;">
-                                <label class="status-toggle">
-                                    <input asp-for="Emp_Status" />
-                                    <span class="status-slider"></span>
-                                </label>
-                                <div>
-                                    <div style="font-weight:600;font-size:14px;">Active Employee</div>
-                                    <div style="font-size:12px;color:#888;">
-                                        Toggle to set employee as active or inactive
-                                    </div>
-                                </div>
+                        <div class="col-md-6">
+                            <label asp-for="Emp_Salary" class="form-label small fw-bold">Monthly Salary</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">₹</span>
+                                <input asp-for="Emp_Salary" class="form-control border-start-0" placeholder="0.00">
                             </div>
+                            <span asp-validation-for="Emp_Salary" class="text-danger small"></span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <!-- Buttons -->
-                    <div class="d-flex gap-3 mt-4">
-                        <button type="submit" class="btn btn-save">
-                            <i class="bi bi-save-fill me-2"></i> Update Employee
-                        </button>
-                        <a asp-action="Index" class="btn btn-back">
-                            <i class="bi bi-arrow-left me-2"></i> Back
-                        </a>
+        <div class="col-lg-4">
+            <!-- Profile Photo -->
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 1rem;">
+                <div class="card-header bg-white p-4">
+                    <h5 class="card-title fw-bold">Profile Photo</h5>
+                </div>
+                <div class="card-body p-4 pt-0 text-center">
+                    <div class="mb-3">
+                        <div class="bg-light rounded-circle mx-auto d-flex align-items-center justify-content-center border" style="width: 120px; height: 120px; overflow: hidden;">
+                            @if (string.IsNullOrEmpty(Model?.Emp_Image))
+                            {
+                                <i id="previewIcon" class="bi bi-person text-muted" style="font-size: 3rem;"></i>
+                                <img id="previewImg" class="img-fluid d-none" style="object-fit: cover; width: 100%; height: 100%;">
+                            }
+                            else
+                            {
+                                <i id="previewIcon" class="bi bi-person text-muted d-none" style="font-size: 3rem;"></i>
+                                <img id="previewImg" src="@Model.Emp_Image" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
+                            }
+                        </div>
                     </div>
+                    <label class="btn btn-outline-primary btn-sm btn-file">
+                        Browse Photo <input type="file" asp-for="ImageFile" class="d-none" onchange="previewImage(this)">
+                    </label>
+                    <div class="text-muted small mt-2">JPG, PNG or GIF. Max 5MB.</div>
+                </div>
+            </div>
 
-                </form>
+            <!-- Status -->
+            <div class="card border-0 shadow-sm" style="border-radius: 1rem;">
+                <div class="card-header bg-white p-4">
+                    <h5 class="card-title fw-bold">System Status</h5>
+                </div>
+                <div class="card-body p-4 pt-0">
+                    <div class="form-check form-switch mb-2">
+                        <input asp-for="Emp_Status" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Account Active</label>
+                    </div>
+                    <p class="text-muted small">Active employees can access their portal and receive notifications.</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
     <script>
-        function previewImage(event) {
-            var reader = new FileReader();
-            reader.onload = function () {
-                document.getElementById('imagePreview').src = reader.result;
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('previewImg').classList.remove('d-none');
+                    document.getElementById('previewIcon').classList.add('d-none');
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(event.target.files[0]);
         }
     </script>
 }

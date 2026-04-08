@@ -5,10 +5,19 @@
 
 <aside class="sidebar">
     <div class="sidebar-header py-4 px-3">
-        <a href="/" class="d-block text-center text-decoration-none">
-            <img src="~/images/logo.png" alt="Techies Infotech" class="img-fluid" style="max-height: 80px; max-width: 180px;" asp-append-version="true">
+        <a asp-controller="Home" asp-action="Index" class="d-block text-center text-decoration-none">
+            <img src="~/images/logo.png" alt="Techies Infotech" class="img-fluid sidebar-full-logo" style="max-height: 80px; max-width: 180px;" asp-append-version="true">
+            <svg viewBox="0 0 100 100" class="img-fluid sidebar-icon-logo d-none" style="height: 38px; width: 38px; min-width: 38px; margin: 0 auto;">
+                <path d="M40 85 L15 70 L15 30 L50 10 L85 30 L85 70 L60 85" fill="none" stroke="#0072bc" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M50 85 L50 35 M32 50 L50 35 L68 50" fill="none" stroke="#0072bc" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </a>
     </div>
+
+    <!-- Edge Toggle Button -->
+    <button class="btn btn-primary rounded-circle shadow-sm position-absolute" id="sidebarToggle" title="Toggle Sidebar" style="width: 28px; height: 28px; padding: 0; right: -14px; top: 32px; z-index: 1050; border: 2px solid white; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%;">
+        <i class="bi bi-chevron-left text-white" id="sidebarToggleIcon" style="font-size: 0.8rem; font-weight: bold; transition: transform 0.3s ease;"></i>
+    </button>
     
     <nav class="sidebar-nav">
         <ul class="nav flex-column">
@@ -16,6 +25,12 @@
                 <a class="nav-link @(controller == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(controller == "Users" ? "active" : "")" asp-controller="Users" asp-action="Index">
+                    <i class="bi bi-person-badge"></i>
+                    <span>Users</span>
                 </a>
             </li>
             <li class="nav-item">

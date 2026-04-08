@@ -1,0 +1,136 @@
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="page-header pb-4 mb-4 border-bottom">
+    <div>
+        <h1 class="page-title mb-1">User Profile</h1>
+        <p class="page-subtitle mb-0">Manage your personal information and account security</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Left Column: Profile Card -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm" style="border-radius: 1rem;">
+            <div class="card-body p-4 text-center">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3 shadow-sm" style="width: 100px; height: 100px; font-size: 2.5rem; font-weight: 600;">
+                    DP
+                </div>
+                <h4 class="fw-bold mb-1">Dhaval Patel</h4>
+                <p class="text-muted mb-3">Administrator</p>
+                <div class="d-flex justify-content-center gap-2 mb-4">
+                    <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 rounded-pill px-3 py-2"><i class="bi bi-check-circle me-1"></i> Active Account</span>
+                </div>
+                
+                <ul class="list-group list-group-flush text-start mb-0">
+                    <li class="list-group-item px-0 py-3 d-flex align-items-center">
+                        <div class="text-muted" style="width: 30px;"><i class="bi bi-envelope"></i></div>
+                        <div class="flex-grow-1 fw-medium text-dark">dhaval@techies.com</div>
+                    </li>
+                    <li class="list-group-item px-0 py-3 d-flex align-items-center">
+                        <div class="text-muted" style="width: 30px;"><i class="bi bi-telephone"></i></div>
+                        <div class="flex-grow-1 fw-medium text-dark">+91 9876543210</div>
+                    </li>
+                    <li class="list-group-item px-0 py-3 pb-1 d-flex align-items-center">
+                        <div class="text-muted" style="width: 30px;"><i class="bi bi-calendar-event"></i></div>
+                        <div class="flex-grow-1 fw-medium text-dark">Joined 15 Jan 2024</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Details & Settings -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom pb-3">
+                <h5 class="card-title fw-bold mb-0">Personal Information</h5>
+            </div>
+            <div class="card-body p-4">
+                <form>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">First Name</label>
+                            <input type="text" class="form-control" value="Dhaval">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Last Name</label>
+                            <input type="text" class="form-control" value="Patel">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Email Address</label>
+                            <input type="email" class="form-control bg-light" value="dhaval@techies.com" readonly>
+                            <div class="form-text" style="font-size: 0.75rem;"><i class="bi bi-info-circle me-1"></i>Email cannot be changed directly.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Phone Number</label>
+                            <input type="text" class="form-control" value="+91 9876543210">
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary px-4"><i class="bi bi-check2-circle me-2"></i> Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm mt-4" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom pb-3">
+                <h5 class="card-title fw-bold mb-0">Update Password</h5>
+            </div>
+            <div class="card-body p-4">
+                <form>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Current Password</label>
+                            <input type="password" class="form-control" placeholder="Enter current password">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">New Password</label>
+                            <input type="password" class="form-control" placeholder="Enter new password">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Confirm New Password</label>
+                            <input type="password" class="form-control" placeholder="Confirm new password">
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-dark px-4"><i class="bi bi-shield-lock me-2"></i> Update Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm mt-4" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom pb-3">
+                <h5 class="card-title fw-bold mb-0">Upload Documents</h5>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted small mb-4">Please upload your official documents in <strong class="text-dark">PDF format only</strong>. Ensure the documents are clear and legible.</p>
+                <form>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Document Type</label>
+                            <select class="form-select">
+                                <option value="">Select document type...</option>
+                                <option>Aadhar Card</option>
+                                <option>PAN Card</option>
+                                <option>Previous Job Experience Letter</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Select File</label>
+                            <input type="file" class="form-control" accept=".pdf,application/pdf">
+                            <div class="form-text" style="font-size: 0.75rem;"><i class="bi bi-file-earmark-pdf me-1"></i>Only PDF files are allowed.</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-outline-primary px-4"><i class="bi bi-upload me-2"></i> Upload Document</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

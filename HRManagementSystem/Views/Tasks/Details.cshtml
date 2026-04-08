@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<div class="page-header border-bottom pb-4 mb-4">
+    <div>
+        <h1 class="page-title mb-1">Quarterly Report Preparation</h1>
+        <div class="breadcrumb-container">
+            <div class="page-breadcrumb">
+                <a href="/">Dashboard</a> / <a asp-action="Index">Tasks</a> / <span class="text-dark fw-medium">View Task</span>
+            </div>
+        </div>
+    </div>
+    <div class="header-actions">
+        <a asp-action="Index" class="btn btn-outline-secondary me-2">Back to Tasks</a>
+        <a href="#" class="btn btn-primary"><i class="bi bi-pencil me-2"></i> Edit Task</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Left Column: Task Description & Content -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm mb-4" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom pb-3">
+                <h5 class="card-title fw-bold mb-0">Task Description</h5>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-dark mb-4 pb-2" style="line-height: 1.7;">
+                    Please prepare the Q2 financial and operational performance report. This should include data from all regional branches. Make sure you highlight key achievement metrics and potential bottlenecks experienced in the previous quarter. Combine the final presentation slides along with the Excel data sheets.
+                </p>
+                
+                <h6 class="fw-bold mb-3">Attachments</h6>
+                <div class="d-flex align-items-center p-3 border rounded-3 bg-light" style="max-width: 350px;">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded p-2 me-3">
+                        <i class="bi bi-file-earmark-pdf fs-4"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="fw-medium text-dark small">Q1_Review_Notes.pdf</div>
+                        <div class="text-muted" style="font-size: 0.75rem;">1.2 MB</div>
+                    </div>
+                    <a href="#" class="btn btn-sm btn-outline-secondary border-0"><i class="bi bi-download"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Right Column: Details Info -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm mb-4" style="border-radius: 1rem;">
+            <div class="card-header bg-white p-4 border-bottom pb-3">
+                <h5 class="card-title fw-bold mb-0">Overview</h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="mb-4">
+                    <h6 class="text-muted small text-uppercase fw-bold mb-2"><i class="bi bi-activity text-muted me-1"></i> Status</h6>
+                    <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 border border-info border-opacity-25 rounded-pill fw-medium"><i class="bi bi-clock-history me-1"></i> In Progress</span>
+                </div>
+                <div class="mb-4">
+                    <h6 class="text-muted small text-uppercase fw-bold mb-2"><i class="bi bi-exclamation-square text-muted me-1"></i> Priority</h6>
+                    <span class="badge bg-danger px-3 py-2 rounded-pill fw-medium"><i class="bi bi-exclamation-circle-fill me-1"></i> High</span>
+                </div>
+                <div class="mb-4">
+                    <h6 class="text-muted small text-uppercase fw-bold mb-2"><i class="bi bi-person text-muted me-1"></i> Assignee</h6>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-success bg-opacity-10 text-success rounded-circle d-flex align-items-center justify-content-center fw-bold me-2 border border-success border-opacity-25" style="width: 32px; height: 32px;">
+                            JD
+                        </div>
+                        <span class="text-dark fw-medium">John Doe</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h6 class="text-muted small text-uppercase fw-bold mb-2"><i class="bi bi-calendar-event text-muted me-1"></i> Due Date</h6>
+                    <div class="d-flex align-items-center text-dark fw-medium shadow-sm border rounded px-3 py-2 d-inline-block bg-light">
+                        <i class="bi bi-calendar-x text-danger me-2"></i> 25 May 2024
+                    </div>
+                </div>
+                <div class="pt-2 border-top">
+                    <h6 class="text-muted small text-uppercase fw-bold mb-2 mt-2">Created By</h6>
+                    <div class="text-dark fw-semibold">Admin</div>
+                    <div class="text-muted small">20 May 2024, 09:00 AM</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

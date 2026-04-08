@@ -74,9 +74,9 @@
                                 <a asp-action="Edit" asp-route-id="@item.Dept_Id" class="btn btn-sm btn-outline-light text-primary border" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <a asp-action="Delete" asp-route-id="@item.Dept_Id" class="btn btn-sm btn-outline-light text-danger border" title="Delete">
+                                <button type="button" onclick="confirmDelete('@Url.Action("Delete", "Department", new { id = item.Dept_Id })', 'Department')" class="btn btn-sm btn-outline-light text-danger border" title="Delete">
                                     <i class="bi bi-trash"></i>
-                                </a>
+                                </button>
                             </div>
                         </td>
                     </tr>
