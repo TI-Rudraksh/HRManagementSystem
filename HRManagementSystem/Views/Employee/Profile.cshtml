@@ -1,0 +1,126 @@
+﻿@model HRManagementSystem.Models.Employee
+@using System.Security.Claims
+
+@{
+    var name = User.Identity.Name;
+    var email = User.FindFirst(ClaimTypes.Email)?.Value;
+    var role = User.FindFirst(ClaimTypes.Role)?.Value;
+    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+
+<form asp-action="Profile" method="post" enctype="multipart/form-data">
+    <div class="container mt-4">
+
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+
+                <div class="row">
+
+                    <!-- 🔹 LEFT: PROFILE PHOTO -->
+                    <div class="col-md-3 text-center border-end">
+
+                        <div class="mb-3">
+                            <img src="@(string.IsNullOrEmpty(Model.Photo) ? "/images/default.png" : Model.Photo)"
+                                 class="rounded-circle shadow"
+                                 width="140" height="140"
+                                 style="object-fit: cover;" />
+                        </div>
+
+                        <input type="file" name="PhotoFile" class="form-control mt-2" />
+
+                        <p class="text-muted small mt-2">Upload profile photo</p>
+                    </div>
+
+                    <!-- 🔹 RIGHT: DETAILS -->
+                    <div class="col-md-9">
+
+                        <h4 class="mb-4 fw-bold">My Profile</h4>
+
+                        <div class="row">
+
+                            <!-- 🔹 AUTO FILLED (READONLY) -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Name</label>
+                                <input value="@name" class="form-control" readonly />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input value="@email" class="form-control" readonly />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">User ID</label>
+                                <input value="@userId" class="form-control" readonly />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Role</label>
+                                <input value="@role" class="form-control bg-light" readonly />
+                            </div>
+
+                            <hr class="my-3" />
+
+                            <!-- 🔹 USER INPUT FIELDS -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Enter phone number" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Salary</label>
+                                <input asp-for="Salary" class="form-control" placeholder="Enter salary" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Department</label>
+                                <select asp-for="DepartmentId" asp-items="ViewBag.Departments" class="form-select"></select>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Bank Details</label>
+                                <textarea asp-for="BankDetails" class="form-control" rows="3" placeholder="Enter bank details"></textarea>
+                            </div>
+
+                        </div>
+
+                        <!-- 🔹 SAVE BUTTON -->
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary px-4 rounded-pill">
+                                💾 Save Profile
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<style>
+    .card {
+        background: #ffffff;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #0d6efd;
+    }
+
+    .rounded-4 {
+        border-radius: 20px !important;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4f46e5, #3b82f6);
+        border: none;
+    }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+</style>

@@ -6,39 +6,23 @@ namespace HRManagementSystem.Models
     public class Employee
     {
         [Key]
-        public int Emp_Id { get; set; }
-
-        [Required, StringLength(200)]
-        public string Emp_Name { get; set; }
-
-        [Required, Range(18, 65)]
-        public int Emp_Age { get; set; }
+        public int EmployeeId { get; set; }
 
         [Required]
-        public string Emp_Gender { get; set; }
+        public string Name { get; set; }
 
-        [Required, StringLength(50)]
-        public string Emp_Mobile { get; set; }
+        [Required, EmailAddress]
+        public string Email { get; set; }
 
-        [Required, Range(0, int.MaxValue)]
-        public int Emp_Salary { get; set; }
-
-        [Required, StringLength(100)]
-        public string Emp_Email { get; set; }
-
-        public bool Emp_Status { get; set; }
-
-        public string? Emp_Image { get; set; }
-
+        public string? PhoneNumber { get; set; }
+        public string? Photo { get; set; }
+        public decimal Salary { get; set; }
+        public string? BankDetails { get; set; }
 
         [ForeignKey("Department")]
-        [Required(ErrorMessage = "Please select department")]
-        public int Dept_Id { get; set; }
+        public int DepartmentId { get; set; }
 
-        public Department? Department { get; set; }
-
-
-        [NotMapped]
-        public IFormFile? ImageFile { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

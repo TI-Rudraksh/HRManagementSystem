@@ -1,153 +1,82 @@
 ﻿using HRManagementSystem.Data;
 using HRManagementSystem.Models;
-using HRManagementSystem.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace HRManagementSystem.Controllers
 {
     public class EmployeeController : Controller
     {
         private readonly DB _context;
-        private readonly IWebHostEnvironment _env;
 
-        public EmployeeController(DB context, IWebHostEnvironment env)
+        public EmployeeController(DB context)
         {
             _context = context;
-            _env = env;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Profile()
         {
-            var employees = await _context.Employees.Include(e => e.Department).ToListAsync();
-            return View(employees);
-        }
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
+            var employee = _context.Employees
+                .FirstOrDefault(e => e.UserId == userId);
 
-        public async Task<IActionResult> Create()
-        {
-            ViewBag.Departments = new SelectList(_context.Departments, "Dept_Id", "DepartmentName");
-            return View();
+            if (employee == null)
+            {
+                employee = new Employee
+                {
+                    UserId = userId
+                };
+            }
+
+            ViewBag.Departments = new SelectList(_context.Departments, "Id", "Name");
+
+            return View(employee);
         }
 
         [HttpPost]
-        public IActionResult Create(Employee emp)
+        public IActionResult Profile(Employee model, IFormFile PhotoFile)
         {
-            if (ModelState.IsValid)
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var employee = _context.Employees
+                .FirstOrDefault(e => e.UserId == userId);
+
+            if (PhotoFile != null)
             {
-                if (emp.ImageFile != null)
+                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(PhotoFile.FileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
                 {
-                    string folder = Path.Combine(_env.WebRootPath, "employeeImages");
-
-                    if (!Directory.Exists(folder))
-                    {
-                        Directory.CreateDirectory(folder);
-                    }
-
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(emp.ImageFile.FileName);
-
-                    string filePath = Path.Combine(folder, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        emp.ImageFile.CopyTo(stream);
-                    }
-
-                    emp.Emp_Image = "/employeeImages/" + fileName;
+                    PhotoFile.CopyTo(stream);
                 }
 
-                _context.Employees.Add(emp);
-                _context.SaveChanges();
-
-                _context.Notifications.Add(new Notification
-                {
-                    Message = $"New employee '{emp.Emp_Name}' added successfully.",
-                    Icon = "bi-person-plus-fill",
-                    Color = "text-success"
-                });
-                _context.SaveChanges();
-
-                return RedirectToAction("Index");
+                model.Photo = "/images/" + fileName;
             }
 
-            ViewBag.Departments = new SelectList(_context.Departments, "Dept_Id", "DepartmentName");
-
-            return View(emp);
-        }
-
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            var emp = await _context.Employees.FindAsync(id);
-            if (emp == null)
+            if (employee == null)
             {
-                return NotFound();
+                model.UserId = userId;
+                _context.Employees.Add(model);
             }
-            ViewBag.Departments = new SelectList(_context.Departments, "Dept_Id", "DepartmentName", emp.Dept_Id);
-            return View(emp);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(Employee emp)
-        {
-            if (!ModelState.IsValid)
+            else
             {
-                ViewBag.Departments = new SelectList(_context.Departments, "Dept_Id", "DepartmentName", emp.Dept_Id);
-                return View(emp);
+                employee.Name = model.Name;
+                employee.Email = model.Email;
+                employee.PhoneNumber = model.PhoneNumber;
+                employee.Salary = model.Salary;
+                employee.BankDetails = model.BankDetails;
+                employee.DepartmentId = model.DepartmentId;
+
+                if (model.Photo != null)
+                    employee.Photo = model.Photo;
             }
 
-            var existing = await _context.Employees.FindAsync(emp.Emp_Id);
-            if (existing == null) return NotFound();
+            _context.SaveChanges();
 
-            if (emp.ImageFile != null)
-            {
-                string folder = Path.Combine(_env.WebRootPath, "employeeImages");
-                if (!Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
-
-                string fileName = Guid.NewGuid() + Path.GetExtension(emp.ImageFile.FileName);
-                using var stream = new FileStream(Path.Combine(folder, fileName), FileMode.Create);
-
-                await emp.ImageFile.CopyToAsync(stream);
-                existing.Emp_Image = "/employeeImages/" + fileName;
-            }
-
-            existing.Emp_Name = emp.Emp_Name;
-            existing.Emp_Age = emp.Emp_Age;
-            existing.Emp_Email = emp.Emp_Email;
-            existing.Emp_Gender = emp.Emp_Gender;
-            existing.Emp_Mobile = emp.Emp_Mobile;
-            existing.Emp_Salary = emp.Emp_Salary;
-            existing.Emp_Status = emp.Emp_Status;
-            existing.Dept_Id = emp.Dept_Id;
-
-            _context.Notifications.Add(new Notification
-            {
-                Message = $"Employee '{emp.Emp_Name}' updated successfully.",
-                Icon = "bi-pencil-fill",
-                Color = "text-warning"
-            });
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult DepartmentWiseEmployees()
-        {
-            var data = _context.Departments
-                .Select(d => new DepartmentEmployeeViewModel
-                {
-                    DepartmentName = d.DepartmentName,
-                    Employees = _context.Employees
-                        .Where(e => e.Dept_Id == d.Dept_Id)
-                        .ToList()
-                }).ToList();
-
-            return View(data);
+            return RedirectToAction("Profile");
         }
     }
 }

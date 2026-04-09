@@ -1,80 +1,97 @@
+@using HRManagementSystem.ViewModel
+@model CreateUserViewModel
+
 @{
     ViewData["Title"] = "Add User";
 }
 
-<form action="#" method="post">
+<form asp-action="Create" method="post">
+
     <!-- Page Header -->
     <div class="page-header border-bottom pb-4 mb-4">
         <div>
             <h1 class="page-title">Add User</h1>
             <div class="breadcrumb-container">
                 <div class="page-breadcrumb">
-                    <a href="#">Dashboard</a> / <a href="@Url.Action("Index", "Users")">Users</a> / <span class="text-dark fw-medium">Add User</span>
+                    <a href="#">Dashboard</a> /
+                    <a href="@Url.Action("Index", "Users")">Users</a> /
+                    <span class="text-dark fw-medium">Add User</span>
                 </div>
             </div>
-            <p class="page-subtitle mt-2 mb-0">Create a new system login account and assign role permissions</p>
+            <p class="page-subtitle mt-2 mb-0">
+                Create a new system login account and assign role permissions
+            </p>
         </div>
+
         <div class="d-flex align-items-center gap-2">
-            <a href="@Url.Action("Index", "Users")" class="btn btn-outline-secondary rounded-3 px-3 shadow-none border">Cancel</a>
-            <button type="submit" class="btn btn-primary rounded-3 px-4 shadow-sm">
+            <a href="@Url.Action("Index", "Users")" class="btn btn-outline-secondary rounded-3 px-3 border">
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-primary rounded-3 px-4">
                 Save User
             </button>
         </div>
     </div>
 
-    <!-- Form Container -->
+    <!-- Form -->
     <div class="card border-0 shadow-sm p-4 mx-auto" style="max-width: 900px;">
         <h5 class="fw-semibold text-dark mb-4 fs-6 pb-2 border-bottom">Account Details</h5>
-        
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
         <div class="row g-4">
-            <!-- Full Name -->
+
+            <!-- Name -->
             <div class="col-md-6">
-                <label class="form-label fw-medium text-dark small text-uppercase shadow-none border-0 px-0 ps-1 pb-1">Full Name</label>
-                <input type="text" class="form-control px-3" placeholder="e.g. Jane Doe" required>
+                <label class="form-label small text-uppercase">Full Name</label>
+                <input asp-for="Name" class="form-control px-3" placeholder="e.g. Jane Doe" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            
+
             <!-- Email -->
             <div class="col-md-6">
-                <label class="form-label fw-medium text-dark small text-uppercase shadow-none border-0 px-0 ps-1 pb-1">Email Address</label>
-                <input type="email" class="form-control px-3" placeholder="jane@example.com" required>
+                <label class="form-label small text-uppercase">Email Address</label>
+                <input asp-for="Email" class="form-control px-3" placeholder="jane@example.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            
+
             <!-- Password -->
             <div class="col-md-6">
-                <label class="form-label fw-medium text-dark small text-uppercase shadow-none border-0 px-0 ps-1 pb-1">Password</label>
-                <input type="password" class="form-control px-3" placeholder="Enter password" required>
-            </div>
-            
-            <!-- Confirm Password -->
-            <div class="col-md-6">
-                <label class="form-label fw-medium text-dark small text-uppercase shadow-none border-0 px-0 ps-1 pb-1">Confirm Password</label>
-                <input type="password" class="form-control px-3" placeholder="Confirm password" required>
+                <label class="form-label small text-uppercase">Password</label>
+                <input asp-for="Password" type="password" class="form-control px-3" placeholder="Enter password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <!-- Role -->
+            <!-- Role Dropdown -->
             <div class="col-md-6">
-                <label class="form-label fw-medium text-dark small text-uppercase shadow-none border-0 px-0 ps-1 pb-1">Role</label>
-                <select class="form-select px-3" required>
-                    <option value="" disabled selected>Select a role...</option>
-                    <option value="Super Admin">Super Admin</option>
-                    <option value="Admin">Admin</option>
-                    <option value="HR">HR</option>
-                    <option value="Employee">Employee</option>
+                <label class="form-label small text-uppercase">Role</label>
+                <select asp-for="RoleId" class="form-select px-3" asp-items="ViewBag.Roles">
+                    <option value="">Select a role...</option>
                 </select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
             </div>
 
+            <!-- Status -->
             <div class="col-12 mt-2 pt-3 border-top">
                 <div class="d-flex align-items-center">
                     <div class="me-3">
-                        <label class="form-label fw-semibold text-dark mb-0 fs-6">User Status</label>
-                        <div class="form-text mt-0">Toggle to activate or deactivate this user's login access.</div>
+                        <label class="form-label fw-semibold mb-0 fs-6">User Status</label>
+                        <div class="form-text mt-0">
+                            Toggle to activate or deactivate this user's login access.
+                        </div>
                     </div>
                     <div class="form-check form-switch ms-auto pt-2">
-                        <input class="form-check-input" type="checkbox" id="statusSwitch" checked style="cursor: pointer; width: 3rem; height: 1.5rem;">
-                        <label class="form-check-label ps-2 mt-1 text-dark fw-medium" for="statusSwitch">Active</label>
+                        <input class="form-check-input" type="checkbox" checked style="width: 3rem; height: 1.5rem;">
+                        <label class="form-check-label ps-2 mt-1 fw-medium">Active</label>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

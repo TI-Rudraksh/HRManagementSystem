@@ -1,0 +1,27 @@
+﻿@model IEnumerable<User>
+
+<div class="container mt-4">
+    <h2>User List</h2>
+
+    <a class="btn btn-primary mb-3" asp-action="CreateUser">+ Add User</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>RoleId</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.RoleId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

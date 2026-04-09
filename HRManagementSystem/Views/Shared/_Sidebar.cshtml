@@ -1,109 +1,138 @@
+@using System.Security.Claims
+
 @{
     var controller = ViewContext.RouteData.Values["controller"]?.ToString();
     var action = ViewContext.RouteData.Values["action"]?.ToString();
+
+    //  Get Role
+    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
 }
 
 <aside class="sidebar">
     <div class="sidebar-header py-4 px-3">
         <a asp-controller="Home" asp-action="Index" class="d-block text-center text-decoration-none">
-            <img src="~/images/logo.png" alt="Techies Infotech" class="img-fluid sidebar-full-logo" style="max-height: 80px; max-width: 180px;" asp-append-version="true">
-            <svg viewBox="0 0 100 100" class="img-fluid sidebar-icon-logo d-none" style="height: 38px; width: 38px; min-width: 38px; margin: 0 auto;">
-                <path d="M40 85 L15 70 L15 30 L50 10 L85 30 L85 70 L60 85" fill="none" stroke="#0072bc" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M50 85 L50 35 M32 50 L50 35 L68 50" fill="none" stroke="#0072bc" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </a>
-    </div>
+            <img src="~/images/logo.png" class="img-fluid sidebar-full-logo" style="max-height: 80px; max-width: 180px;">
+            </a>
+        </div>
 
-    <!-- Edge Toggle Button -->
-    <button class="btn btn-primary rounded-circle shadow-sm position-absolute" id="sidebarToggle" title="Toggle Sidebar" style="width: 28px; height: 28px; padding: 0; right: -14px; top: 32px; z-index: 1050; border: 2px solid white; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 50%;">
-        <i class="bi bi-chevron-left text-white" id="sidebarToggleIcon" style="font-size: 0.8rem; font-weight: bold; transition: transform 0.3s ease;"></i>
-    </button>
-    
-    <nav class="sidebar-nav">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link @(controller == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
+        <nav class="sidebar-nav">
+            <ul class="nav flex-column">
+
+                <li class="nav-item">
+                    <a class="nav-link @(controller == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                @if (userRole?.ToLower() == "superadmin" || userRole?.ToLower() == "admin")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link @(controller == "Users" ? "active" : "")" asp-controller="Users" asp-action="Index">
+                            <i class="bi bi-person-badge"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                }
             </li>
-            <li class="nav-item">
-                <a class="nav-link @(controller == "Users" ? "active" : "")" asp-controller="Users" asp-action="Index">
-                    <i class="bi bi-person-badge"></i>
-                    <span>Users</span>
-                </a>
-            </li>
+            
+
+            <!-- Employees -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Employee" ? "active" : "")" asp-controller="Employee" asp-action="Index">
                     <i class="bi bi-people"></i>
                     <span>Employees</span>
                 </a>
             </li>
+
+            <!-- Departments -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Department" ? "active" : "")" asp-controller="Department" asp-action="Index">
                     <i class="bi bi-building"></i>
                     <span>Departments</span>
                 </a>
             </li>
+
+            <!-- Attendance -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Attendance" ? "active" : "")" asp-controller="Attendance" asp-action="Index">
                     <i class="bi bi-calendar-check"></i>
                     <span>Attendance</span>
                 </a>
             </li>
+
+            <!-- Payroll -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Payroll" ? "active" : "")" asp-controller="Payroll" asp-action="Index">
                     <i class="bi bi-bank"></i>
                     <span>Payroll</span>
                 </a>
             </li>
+
+            <!-- Appraisal -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Appraisal" ? "active" : "")" asp-controller="Appraisal" asp-action="Index">
                     <i class="bi bi-graph-up"></i>
                     <span>Appraisal</span>
                 </a>
             </li>
+
+            <!-- Reimbursement -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Reimbursement" ? "active" : "")" asp-controller="Reimbursement" asp-action="Index">
                     <i class="bi bi-cash-stack"></i>
                     <span>Reimbursement</span>
                 </a>
             </li>
+
+            <!-- Tasks -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Tasks" ? "active" : "")" asp-controller="Tasks" asp-action="Index">
                     <i class="bi bi-clipboard-check"></i>
                     <span>Tasks</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link @(controller == "Roles" ? "active" : "")" asp-controller="Roles" asp-action="Index">
-                    <i class="bi bi-shield-lock"></i>
-                    <span>Roles & Permissions</span>
-                </a>
-            </li>
+
+            <!--  Roles (Only SuperAdmin) -->
+            @if (userRole == "SuperAdmin")
+            {
+                <li class="nav-item">
+                    <a class="nav-link @(controller == "Roles" ? "active" : "")" asp-controller="Roles" asp-action="Index">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Roles & Permissions</span>
+                    </a>
+                </li>
+            }
+
+            <!-- Documents -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Documents" ? "active" : "")" asp-controller="Documents" asp-action="Index">
                     <i class="bi bi-folder2-open"></i>
                     <span>Documents</span>
                 </a>
             </li>
+
+            <!-- Holidays -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Holidays" ? "active" : "")" asp-controller="Holidays" asp-action="Index">
                     <i class="bi bi-calendar-heart"></i>
                     <span>Holiday Calendar</span>
                 </a>
             </li>
+
+            <!-- Settings -->
             <li class="nav-item">
                 <a class="nav-link @(controller == "Settings" ? "active" : "")" asp-controller="Settings" asp-action="Index">
                     <i class="bi bi-gear"></i>
                     <span>Settings</span>
                 </a>
             </li>
+
         </ul>
     </nav>
 
     <div class="mt-auto p-3">
-         <a class="nav-link text-danger border-top pt-3 mt-2" asp-controller="Account" asp-action="Logout">
+        <a class="nav-link text-danger border-top pt-3 mt-2" asp-controller="Auth" asp-action="Logout">
             <i class="bi bi-box-arrow-right"></i>
             <span>Logout</span>
         </a>

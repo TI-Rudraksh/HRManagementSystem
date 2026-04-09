@@ -5,8 +5,13 @@ namespace HRManagementSystem.Models
     public class Department
     {
         [Key]
-        public int Dept_Id { get; set; }
-        [Required , StringLength(100)]
+        public int DepartmentId { get; set; }
+
+        [Required]
         public string DepartmentName { get; set; }
+
+        public string Description { get; set; }
+
+        public ICollection<Employee> Employees { get; set; }
     }
 }
