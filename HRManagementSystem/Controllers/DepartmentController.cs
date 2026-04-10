@@ -16,8 +16,7 @@ namespace HRManagementSystem.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var departments = await _context.Departments.ToListAsync();
-            return View(departments);
+            return View(await _context.Departments.ToListAsync());
         }
 
         public IActionResult Create()
@@ -26,19 +25,20 @@ namespace HRManagementSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Department department)
         {
             if (ModelState.IsValid)
             {
                 _context.Departments.Add(department);
-                await _context.SaveChangesAsync();
 
                 _context.Notifications.Add(new Notification
                 {
-                    Message = $"New department '{department.DepartmentName}' added.",
+                    Message = $"New Department '{department.DepartmentName}' added",
                     Icon = "bi-buildings-fill",
                     Color = "text-success"
                 });
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -48,32 +48,49 @@ namespace HRManagementSystem.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var dept = await _context.Departments.FindAsync(id);
-            if (dept == null)
+            if (dept == null) return NotFound();
+
+            return View(dept);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Department dept)
+        {
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                _context.Departments.Update(dept);
+
+                _context.Notifications.Add(new Notification
+                {
+                    Message = $"Department '{dept.DepartmentName}' updated",
+                    Icon = "bi-pencil-fill",
+                    Color = "text-warning"
+                });
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(dept);
         }
-        [HttpPost]
-        public async Task<IActionResult> Edit(Department dept)
+
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!ModelState.IsValid)
+            var dept = await _context.Departments.FindAsync(id);
+            if (dept != null)
             {
-                return View(dept);
+                _context.Departments.Remove(dept);
+
+                _context.Notifications.Add(new Notification
+                {
+                    Message = $"Department '{dept.DepartmentName}' deleted",
+                    Icon = "bi-trash-fill",
+                    Color = "text-danger"
+                });
+
+                await _context.SaveChangesAsync();
             }
-
-
-            _context.Departments.Update(dept);
-
-            _context.Notifications.Add(new Notification
-            {
-                Message = $"Department '{dept.DepartmentName}' updated successfully.",
-                Icon = "bi-pencil-fill",
-                Color = "text-warning"
-            });
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

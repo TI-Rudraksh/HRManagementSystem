@@ -1,34 +1,29 @@
-@{
-    ViewData["Title"] = "Add Department";
-}
+@model HRManagementSystem.Models.Department
 
-<form>
-    <div class="page-header">
-        <div>
-            <h1 class="page-title">Add Department</h1>
-            <p class="page-subtitle">Define a new organizational unit</p>
-        </div>
-        <div class="header-actions">
-            <a asp-action="Index" class="btn btn-outline-secondary me-2">Cancel</a>
-            <button type="submit" class="btn btn-primary">Create Department</button>
+<div class="container mt-4">
+    <div class="card shadow rounded-4">
+        <div class="card-body">
+            <h4 class="mb-3">Add Department</h4>
+
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="mb-3">
+                    <label class="form-label">Department Name</label>
+                    <input asp-for="DepartmentName" class="form-control" />
+                    <span asp-validation-for="DepartmentName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Save
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </form>
         </div>
     </div>
-
-    <div class="card border-0 shadow-sm" style="border-radius: 1rem;">
-        <div class="card-body p-4">
-            <div class="row g-3">
-                <div class="col-md-12 mb-3">
-                    <label class="form-label small fw-bold">Department Name</label>
-                    <input type="text" class="form-control" placeholder="e.g. Quality Assurance">
-                </div>
-                <div class="col-md-12">
-                    <label class="form-label small fw-bold">Department Manager</label>
-                    <select class="form-select">
-                        <option>Search Manager...</option>
-                        <option>Dhaval Patel</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+</div>
