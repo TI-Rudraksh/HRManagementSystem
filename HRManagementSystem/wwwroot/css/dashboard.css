@@ -332,6 +332,7 @@ body.sidebar-collapsed .sidebar-icon-logo {
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 2rem;
+    gap: 1rem;
 }
 
 .page-title {
@@ -344,4 +345,129 @@ body.sidebar-collapsed .sidebar-icon-logo {
 .page-subtitle {
     color: var(--text-muted);
     font-size: 1rem;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 998;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        box-shadow: 10px 0 15px -3px rgba(0, 0, 0, 0.05);
+    }
+
+    body.mobile-sidebar-open {
+        overflow: hidden;
+    }
+
+    body.mobile-sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    body.mobile-sidebar-open .sidebar-overlay {
+        display: block;
+    }
+
+    .main-wrapper {
+        margin-left: 0 !important;
+    }
+
+    .top-navbar {
+        padding: 0 1rem;
+    }
+
+    .content-body {
+        padding: 1.25rem 1rem;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .card-header, .card-body {
+        padding: 1rem !important;
+    }
+
+    .table-responsive {
+        border: 0;
+    }
+
+    /* Hide sidebar toggle edge button on mobile as we'll use a hamburger menu */
+    #sidebarToggle {
+        display: none !important;
+    }
+
+    .breadcrumb-container {
+        display: none;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .page-header .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .top-navbar {
+        gap: 0.5rem !important;
+    }
+
+    .dropdown-menu[style*="width: 380px"] {
+        width: 90vw !important;
+    }
+}
+
+/* Mobile Nav Toggle Button Styles */
+.mobile-nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.mobile-nav-toggle .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+}
+
+body.mobile-sidebar-open .mobile-nav-toggle .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+body.mobile-sidebar-open .mobile-nav-toggle .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+body.mobile-sidebar-open .mobile-nav-toggle .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
 }

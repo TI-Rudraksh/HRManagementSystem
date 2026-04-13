@@ -25,6 +25,7 @@
 <body>
     
     <partial name="_Sidebar" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <main class="main-wrapper">
         <partial name="_Navbar" />
@@ -62,10 +63,36 @@
                     }
                 });
 
-                if(localStorage.getItem('sidebarState') === 'collapsed') {
+                if(localStorage.getItem('sidebarState') === 'collapsed' && window.innerWidth >= 992) {
                     document.body.classList.add('sidebar-collapsed');
                 }
             }
+
+            // Mobile Sidebar Toggle
+            const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            
+            if (mobileSidebarToggle) {
+                mobileSidebarToggle.addEventListener('click', function() {
+                    document.body.classList.add('mobile-sidebar-open');
+                });
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', function() {
+                    document.body.classList.remove('mobile-sidebar-open');
+                });
+            }
+
+            // Close mobile sidebar on link click
+            const sidebarLinks = document.querySelectorAll('.sidebar .nav-link');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth < 992) {
+                        document.body.classList.remove('mobile-sidebar-open');
+                    }
+                });
+            });
         });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
